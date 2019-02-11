@@ -5,7 +5,8 @@
 [![Build Status][travis-image]][travis-url]
 [![Downloads Stats][npm-downloads]][npm-url] -->
 
-Tired of using document.querySelector() with CSS selectors? Ever wanted to use SQL-like syntax to query DOM elements? Yeah, me neither.
+Tired of using document.querySelector() with CSS selectors? Ever wanted to use SQL-like syntax to query DOM elements?
+Yeah, me neither.
 
 <!-- ![](header.png) -->
 

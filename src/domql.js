@@ -1,12 +1,21 @@
 export default class Domql {
-  constructor() {
+
+  constructor(query) {
     this._name = 'Domql';
+    this._query = query;
   }
+
   get name() {
     return this._name;
   }
+  get query() {
+    return this._query;
+  }
 
-  select(query) {
-    return document.querySelector(query);
+  compile(query) {
+    this._query = query;
+  }
+  execute() {
+    return document.querySelector(this._query);
   }
 }
