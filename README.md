@@ -37,6 +37,12 @@ _For even more examples and usage, please refer to the [Wiki][wiki]._
 
 ## Development setup
 
+Install Dependencies:
+
+```sh
+npm install
+```
+
 Build:
 
 ```sh

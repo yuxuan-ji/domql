@@ -1,6 +1,6 @@
 export default class Domql {
 
-  constructor(query) {
+  constructor(query = null) {
     this._name = 'Domql';
     this._query = query;
   }
@@ -12,7 +12,7 @@ export default class Domql {
     return this._query;
   }
 
-  compile(query) {
+  compile(query = null) {
     this._query = query;
   }
   execute() {
