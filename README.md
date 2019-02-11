@@ -15,7 +15,7 @@ Yeah, me neither.
 ES6:
 
 ```javascript
-import Domql from './domql.js';
+import Domql from './domql.min.js';
 var cursor = new Domql("SELECT * FROM html WHERE id='foo'");
 var result = cursor.execute();
 ```
@@ -23,7 +23,7 @@ var result = cursor.execute();
 From script:
 
 ```html
-<script src="domql.js"></script>
+<script src="domql.min.js"></script>
 
 <script>
     var cursor = new domql.Domql("SELECT * FROM html WHERE id='foo'");
