@@ -1,3 +1,5 @@
+import * as domqlScan from './domql_scan.js';
+
 export default class Domql {
 
   constructor(query = null) {
@@ -15,6 +17,7 @@ export default class Domql {
 
   compile(query = null) {
     this._query = query;
+    var tokens = domqlScan.scan(query);
   }
 
   execute() {
