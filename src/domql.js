@@ -1,4 +1,6 @@
-import * as tokenizer from './domql_tokenize.js';
+import * as tokenizer from './domql_tokenizer.js';
+import * as parser from './domql_parser.js';
+import * as transpiler from './domql_parser.js';
 
 export default class Domql {
 
@@ -18,6 +20,8 @@ export default class Domql {
   compile(query = null) {
     this._query = query;
     var tokens = tokenizer.tokenize(query);
+    var ast = parser.parse(tokens);
+    var directives = transpiler.transpile(ast);
   }
 
   execute() {
