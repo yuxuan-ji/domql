@@ -21,7 +21,7 @@ export default class Domql {
     this._query = query;
     var tokens = tokenizer.tokenize(query);
     var ast = parser.parse(tokens);
-    var directives = transpiler.transpile(ast);
+    this._directives = transpiler.transpile(ast);
   }
 
   execute() {

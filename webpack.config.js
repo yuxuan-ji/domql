@@ -7,20 +7,22 @@ const pkg = require('./package.json');
 
 let libraryName = 'domql';
 
-let outputFile, mode;
+let outputFile, mode, devtool;
 
 if (env === 'build') {
   mode = 'production';
   outputFile = libraryName + '.min.js';
+  devtool = undefined;
 } else {
   mode = 'development';
   outputFile = libraryName + '.js';
+  devtool = 'source-map';
 }
 
 const config = {
   mode: mode,
   entry: __dirname + '/src/index.js',
-  devtool: 'inline-source-map',
+  devtool: devtool,
   output: {
     path: __dirname + '/lib',
     filename: outputFile,
