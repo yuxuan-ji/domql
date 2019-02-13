@@ -20,6 +20,7 @@ function setupTokenKinds() {
     VALUE: null,
     LPAREN: null,
     RPAREN: null,
+    NUM: null,
     EQ: null,
     NE: null,
     LT: null,
@@ -89,15 +90,16 @@ class AsmDFA {
     //   }
     //   return true;
     // }
-    // function isdigit(c) {
-    //   if (c >= '0' && c <= '9') return true;
-    //   return false;
-    // }
-    // function allowall(c) { return true; }
+    function isdigit(c) {
+      if (c >= '0' && c <= '9') return true;
+      return false;
+    }
     function isspace(c) {return " \t\n\r\v".indexOf(c) !== -1; }
 
     this.registerTransition(this.State.START, isalpha, this.State.VALUE);
     this.registerTransition(this.State.VALUE, isalpha, this.State.VALUE);
+    this.registerTransition(this.State.START, isdigit, this.State.NUM);
+    this.registerTransition(this.State.NUM, isdigit, this.State.NUM);
     this.registerTransition(this.State.START, "(", this.State.LPAREN);
     this.registerTransition(this.State.START, ")", this.State.RPAREN);
     this.registerTransition(this.State.START, "=", this.State.EQ);
