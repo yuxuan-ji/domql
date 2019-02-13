@@ -156,7 +156,6 @@ class AsmDFA {
   start() { return this.State.START; }
 
   // Tokenizes an input string according to the SMM algorithm.
-  // You will learn the SMM algorithm in class around the time of Assignment 6.
   simplifiedMaximalMunch(input) {
     var result = [];
 
