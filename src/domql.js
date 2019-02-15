@@ -1,6 +1,7 @@
 import * as tokenizer from './domql_tokenizer.js';
 import * as parser from './domql_parser.js';
-import * as transpiler from './domql_parser.js';
+import * as transpiler from './domql_transpiler.js';
+import * as utils from './domql_utils.js';
 
 export default class Domql {
 
@@ -25,6 +26,6 @@ export default class Domql {
   }
 
   execute() {
-    return document.querySelector(this._query);
+    return utils.execute(this._directives);
   }
 }
