@@ -119,7 +119,12 @@ class AsmDFA {
     this.registerTransition(this.State.START, '"', this.State.DQUOTE);
     this.registerTransition(this.State.START, '.', this.State.DOT);
   }
-  // Register a transition on all chars in chars or on all chars matching test
+  /**
+   * Register a transition on all chars in chars or on all chars matching test
+   * @param  {Asm.State.*} oldState
+   * @param  {string|function} chars : A string or function that describes the allowed characters
+   * @param  {Asm.State.*} newState
+   */
   registerTransition(oldState, chars, newState) {
     if (typeof chars === 'function') {
       for (var c = 0; c < this._TF_STATE_LEN; ++c) {
@@ -134,28 +139,49 @@ class AsmDFA {
       }
     }
   }
-  // Returns the state corresponding to following a transition
-  // from the given starting state on the given character,
-  // or a special fail state if the transition does not exist.
+
+  /**
+   * Returns the state corresponding to following a transition
+   * from the given starting state on the given character,
+   * or a special fail state if the transition does not exist.
+   * @param  {Asm.State.*} state
+   * @param  {char} nextChar
+   * @return {Asm.State.*}
+   */
   transition(state, nextChar) {
     return this._transitionFunction[state][nextChar.charCodeAt()] === undefined ?
       this.State.FAIL : this._transitionFunction[state][nextChar.charCodeAt()];
   };
 
-  // Checks whether the state returned by transition
-  // corresponds to failure to transition.
+  /**
+   * Checks whether the state returned by transition
+   * corresponds to failure to transition.
+   * @param  {Asm.State.*} state
+   * @return {bool}
+   */
   failed(state) { return state === this.State.FAIL; }
 
-  // Checks whether the state returned by transition
-  // is an accepting state.
+  /**
+   * Checks whether the state returned by transition
+   * is an accepting state.
+   * @param  {Asm.State.*} state
+   * @return {bool}
+   */
   accept(state) {
     return this._acceptingStates.has(state);
   }
 
-  // Returns the starting state of the DFA
+  /**
+   * Returns the starting state of the DFA
+   * @return {Asm.State.*}
+   */
   start() { return this.State.START; }
 
-  // Tokenizes an input string according to the SMM algorithm.
+  /**
+   * Tokenizes an input string according to the SMM algorithm.
+   * @param  {string} input
+   * @return {List<Tokens>}
+   */
   simplifiedMaximalMunch(input) {
     var result = [];
 
@@ -222,6 +248,11 @@ class AsmDFA {
   }
 }
 
+/**
+ * Tokenizes an user query
+ * @param  {string} query
+ * @return {List<Tokens>}
+ */
 export function tokenize(query = null) {
   if (query === null || query === undefined) return null;
   var dfa = new AsmDFA();
