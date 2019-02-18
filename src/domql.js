@@ -1,7 +1,7 @@
-import * as tokenizer from './domql_tokenizer.js';
-import * as parser from './domql_parser.js';
-import * as transpiler from './domql_transpiler.js';
-import * as utils from './domql_utils.js';
+import * as tokenizer from './tokenizer.js';
+import * as parser from './parser.js';
+import * as transpiler from './transpiler.js';
+import * as utils from './utils.js';
 
 export default class Domql {
 
