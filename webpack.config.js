@@ -21,7 +21,7 @@ if (env === 'build') {
 
 const config = {
   mode: mode,
-  entry: __dirname + '/src/index.js',
+  entry: __dirname + '/src/domql.js',
   devtool: devtool,
   output: {
     path: __dirname + '/lib',
