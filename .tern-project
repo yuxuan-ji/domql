@@ -1,0 +1,12 @@
+{
+  "libs": [
+    "browser"
+  ],
+  "plugins": {
+     "node": {},
+     "modules": {},
+     "requirejs": {},
+     "es_modules": {}
+  },
+  "dontLoad": ["**/node_modules/!(mocha*|chai)/**/*.js"]
+}
