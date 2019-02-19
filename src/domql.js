@@ -36,7 +36,7 @@ export class Domql {
   /**
    * Execute compiled set of directives and
    * returns a NodeList or a DOM Element or null if not found
-   * @return {NodeList|Element|null}
+   * @return {NodeList|Element}
    */
   execute() {
     return utils.execute(this._directives);

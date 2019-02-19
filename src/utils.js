@@ -1,8 +1,8 @@
 /**
  * Directive: Sort
  * @param  {function} f : function used to compare
- * @param  {List<*>} arr : list to sort
- * @return {List<*>} : sorted list
+ * @param  {*[]} arr : list to sort
+ * @return {*[]} : sorted list
  */
 export function sort(f, arr) {
   arr.sort(f);
@@ -13,8 +13,8 @@ export function sort(f, arr) {
  * Reduces a list of directives by applying
  * each element on its previous element and
  * returns the final NodeList, HTML Element, or null
- * @param  {List<string|function>} directives
- * @return {NodeList|Element|null}            [description]
+ * @param  {string[]|function[]} directives
+ * @return {NodeList|Element}
  */
 export function execute(directives) {
   if (!directives || directives.length === 0) return null;

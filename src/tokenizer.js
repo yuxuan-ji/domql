@@ -1,3 +1,15 @@
+/**
+ * @typedef {Object} Token
+ * @property {string} kind
+ * @property {string} lexeme
+ */
+/**
+ *  @typedef {Object} Asm
+ *  @property {string} name Asm DFA
+ *  @typedef {Object} Asm.State
+ *  @property {string} name Asm DFA State
+ */
+
 export class Token {
 
   constructor(kind, lexeme) {
@@ -121,9 +133,9 @@ class AsmDFA {
   }
   /**
    * Register a transition on all chars in chars or on all chars matching test
-   * @param  {Asm.State.*} oldState
+   * @param  {Asm.State} oldState
    * @param  {string|function} chars : A string or function that describes the allowed characters
-   * @param  {Asm.State.*} newState
+   * @param  {Asm.State} newState
    */
   registerTransition(oldState, chars, newState) {
     if (typeof chars === 'function') {
@@ -144,9 +156,9 @@ class AsmDFA {
    * Returns the state corresponding to following a transition
    * from the given starting state on the given character,
    * or a special fail state if the transition does not exist.
-   * @param  {Asm.State.*} state
+   * @param  {Asm.State} state
    * @param  {char} nextChar
-   * @return {Asm.State.*}
+   * @return {Asm.State}
    */
   transition(state, nextChar) {
     return this._transitionFunction[state][nextChar.charCodeAt()] === undefined ?
@@ -156,7 +168,7 @@ class AsmDFA {
   /**
    * Checks whether the state returned by transition
    * corresponds to failure to transition.
-   * @param  {Asm.State.*} state
+   * @param  {Asm.State} state
    * @return {bool}
    */
   failed(state) { return state === this.State.FAIL; }
@@ -164,7 +176,7 @@ class AsmDFA {
   /**
    * Checks whether the state returned by transition
    * is an accepting state.
-   * @param  {Asm.State.*} state
+   * @param  {Asm.State} state
    * @return {bool}
    */
   accept(state) {
@@ -173,14 +185,14 @@ class AsmDFA {
 
   /**
    * Returns the starting state of the DFA
-   * @return {Asm.State.*}
+   * @return {Asm.State}
    */
   start() { return this.State.START; }
 
   /**
    * Tokenizes an input string according to the SMM algorithm.
    * @param  {string} input
-   * @return {List<Tokens>}
+   * @return {Token[]}
    */
   simplifiedMaximalMunch(input) {
     var result = [];
@@ -251,7 +263,7 @@ class AsmDFA {
 /**
  * Tokenizes an user query
  * @param  {string} query
- * @return {List<Tokens>}
+ * @return {Token[]}
  */
 export function tokenize(query = null) {
   if (query === null || query === undefined) return null;
