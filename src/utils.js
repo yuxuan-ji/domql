@@ -1,8 +1,8 @@
 /**
  * Directive: Sort
  * @param  {function} f : function used to compare
- * @param  {*[]} arr : list to sort
- * @return {*[]} : sorted list
+ * @param  {any[]} arr : list to sort
+ * @return {any[]} : sorted list
  */
 export function sort(f, arr) {
   arr.sort(f);

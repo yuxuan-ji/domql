@@ -1,7 +1,10 @@
 /**
+ * @typedef {Object} AST
+ * @property {string} name - Abstract Syntax Tree
+ */
+/**
  * Traverses the given Abstract Syntax Tree
  * and generates a set of directives
- * @typedef {import('./parser.js').AST} AST
  * @param  {AST} ast
  * @return {List<string|function>}
  */

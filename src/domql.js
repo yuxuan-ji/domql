@@ -3,6 +3,11 @@ import {parse} from './parser.js';
 import {transpile} from './transpiler.js';
 import * as utils from './utils.js';
 
+/**
+ * @typedef {Object} Domql
+ * @property {string} query
+ * @property {any[]} directives
+ */
 export class Domql {
 
   /**

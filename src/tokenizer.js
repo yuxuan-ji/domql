@@ -4,12 +4,13 @@
  * @property {string} lexeme
  */
 /**
- *  @typedef {Object} Asm
- *  @property {string} name Asm DFA
- *  @typedef {Object} Asm.State
- *  @property {string} name Asm DFA State
+ * @typedef {Object} AsmDFA
+ * @property {AsmDFA.State} State
  */
-
+/**
+ * @typedef {Object} AsmDFA.State
+ * @property {enum} state
+ */
 export class Token {
 
   constructor(kind, lexeme) {
