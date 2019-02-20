@@ -68,5 +68,13 @@ Please make sure to update tests as appropriate.
 4. Push to the branch (`git push origin feature/fooBar`)
 5. Create a new Pull Request
 
+# Documentation
+
+Documentation is generated with JsDoc and jsdoc2md and located in docs/api.md. Run:
+```sh
+bash docs/docs.sh
+```
+to generate the documentation automatically from your JsDoc comments.
+
 <!-- Markdown link & img dfn's -->
 [wiki]: https://github.com/yuxuan-ji/domql/wiki
