@@ -1,15 +1,5 @@
 /**
- * @typedef {Object} Token
- * @property {string} kind
- * @property {string} lexeme
- */
-/**
- * @typedef {Object} AsmDFA
- * @property {AsmDFA.State} State
- */
-/**
- * @typedef {Object} AsmDFA.State
- * @property {enum} state
+ * Domql.Token: Token generated from tokenizer
  */
 export class Token {
 
@@ -70,7 +60,14 @@ function setupTokenKinds() {
 
 setupTokenKinds();
 
+/**
+ * Domql.AsmDFA: Deterministic finite automaton
+ */
 class AsmDFA {
+
+  /**
+   * Initialize an AsmDFA
+   */
   constructor() {
     // Setup states
     this.State = Token.Kind;
@@ -272,8 +269,7 @@ export function tokenize(query = null) {
 
   var tokens = dfa.simplifiedMaximalMunch(query);
 
-  // We need to:
-  // * Remove WHITESPACE tokens entirely.
+  // Remove WHITESPACE tokens entirely.
 
   var newTokens = [];
 

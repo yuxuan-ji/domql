@@ -1,6 +1,5 @@
 /**
- * @typedef {Object} AST
- * @property {string} name - Abstract Syntax Tree
+ * Domql.AST: Abstract Syntax Tree
  */
 export class AST {
   constructor() {

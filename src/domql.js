@@ -4,9 +4,7 @@ import {transpile} from './transpiler.js';
 import * as utils from './utils.js';
 
 /**
- * @typedef {Object} Domql
- * @property {string} query
- * @property {any[]} directives
+ * Domql: Domql API
  */
 export class Domql {
 
