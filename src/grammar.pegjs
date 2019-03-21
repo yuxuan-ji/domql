@@ -140,15 +140,25 @@ column_list_item
     }
 
 from_clause
-  = KW_FROM __ l:table_name { return l; }
+  = KW_FROM __ l:table_ref_list { return l; }
+
+table_ref_list
+  = head:table_name
+    tail:table_ref* {
+      tail.unshift(head);
+      return tail;
+    }
+
+table_ref
+  = __ COMMA __ t:table_name { return t; }
 
 table_name
   = dt:ident tail:(__ DOT __ ident)? {
-      var obj = { table: dt };
+      var obj = { type: 'table_ref', table: dt };
       if (tail !== null) {
         obj.table = tail[3];
       }
-      return obj.table;
+      return obj;
     }
 
 where_clause
