@@ -125,6 +125,62 @@ select_stmt
       };
   }
 
+//////////////////////////////////////////////// CLAUSES ////////////////////////////////////////////////
+
+column_clause
+  = (STAR !ident_start) { return '*'; }
+  / head:column_list_item tail:(__ COMMA __ column_list_item)* {
+      return createList(head, tail);
+    }
+
+column_list_item
+  = c:column_ref {
+      return c;
+    }
+
+from_clause
+  = KW_FROM __ l:table_name { return l; }
+
+table_name
+  = dt:ident tail:(__ DOT __ ident)? {
+      var obj = { table: dt };
+      if (tail !== null) {
+        obj.table = tail[3];
+      }
+      return obj.table;
+    }
+
+where_clause
+  = KW_WHERE __ e:expr { return e; }
+
+group_by_clause
+  = KW_GROUP __ KW_BY __ l:column_ref_list { return l; }
+
+column_ref_list
+  = head:column_ref tail:(__ COMMA __ column_ref)* {
+      return createList(head, tail);
+    }
+
+order_by_clause
+  = KW_ORDER __ KW_BY __ l:order_by_list { return l; }
+
+order_by_list
+  = head:order_by_element tail:(__ COMMA __ order_by_element)* {
+      return createList(head, tail);
+    }
+
+order_by_element
+  = c:column_ref __ d:(KW_DESC / KW_ASC)? {
+    var obj = c;
+    obj.order = 'ASC';
+    if (d === 'DESC') obj.order = 'DESC';
+    return obj;
+  }
+
+limit_clause
+  = KW_LIMIT __ i:(literal_numeric) {
+      return i;
+    }
 
 //////////////////////////////////////////////// KEYWORDS ////////////////////////////////////////////////
 
