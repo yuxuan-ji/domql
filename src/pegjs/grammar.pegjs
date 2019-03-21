@@ -41,7 +41,66 @@
 
     'WHERE': true
   };
+  //////////////////////////////////////////////// UTILITY FCTS ////////////////////////////////////////////////
+
+  function createUnaryExpr(op, e) {
+    return {
+      type: 'unary_expr',
+      operator: op,
+      expr: e
+    };
+  }
+
+  function createBinaryExpr(op, left, right) {
+    return {
+      type: 'binary_expr',
+      operator: op,
+      left: left,
+      right: right
+    };
+  }
+
+  function createList(head, tail) {
+    var result = [head];
+    for (var i = 0; i < tail.length; i++) {
+      result.push(tail[i][3]);
+    }
+    return result;
+  }
+
+  function createBinaryExprChain(head, tail) {
+    var result = head;
+    for (var i = 0; i < tail.length; i++) {
+      result = createBinaryExpr(tail[i][1], result, tail[i][3]);
+    }
+    return result;
+  }
+
+  var cmpPrefixMap = {
+    '+': true,
+    '-': true,
+    '*': true,
+    '/': true,
+    '>': true,
+    '<': true,
+    '!': true,
+    '=': true,
+
+    //for is or in
+    'I': true,
+    'i': true,
+    //for like
+    'L': true,
+    'l': true,
+    //for not
+    'N': true,
+    'n': true
+  };
+
+  // used for dependency analysis
+  var varList = [];
 }
+
 
 //////////////////////////////////////////////// KEYWORDS ////////////////////////////////////////////////
 
