@@ -4,7 +4,7 @@
   "description": "DOM query language",
   "main": "lib/domql.js",
   "scripts": {
-    "build": "webpack --env dev && webpack --env build",
+    "build": "bash build_grammar.sh && webpack --env dev && webpack --env build",
     "dev": "webpack --progress --colors --watch --env dev",
     "test": "mocha --require babel-register --colors ./test/*.spec.js",
     "test:watch": "mocha --require babel-register --colors -w ./test/*.spec.js",

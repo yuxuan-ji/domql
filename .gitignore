@@ -32,3 +32,6 @@ node_modules
 .vscode
 
 .DS_Store
+
+# Pegjs build
+src/pegjs_parser.js

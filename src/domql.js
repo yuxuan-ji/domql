@@ -1,4 +1,3 @@
-import {tokenize} from './tokenizer.js';
 import {parse} from './parser.js';
 import {transpile} from './transpiler.js';
 import * as utils from './utils.js';
@@ -31,8 +30,7 @@ export class Domql {
    */
   compile(query = null) {
     this._query = query;
-    var tokens = tokenize(query);
-    var ast = parse(tokens);
+    var ast = parse(query);
     this._directives = transpile(ast);
   }
 
