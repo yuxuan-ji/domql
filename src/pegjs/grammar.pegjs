@@ -182,6 +182,189 @@ limit_clause
       return i;
     }
 
+//////////////////////////////////////////////// EXPRESSIONS ////////////////////////////////////////////////
+
+expr_list
+  = head:expr tail:(__ COMMA __ expr)* {
+      var el = { type: 'expr_list' };
+      el.value = createList(head, tail);
+      return el;
+    }
+
+/**
+ * Borrowed from PL/SQL ,the priority of below list IS ORDER BY DESC
+ * ---------------------------------------------------------------------------------------------------
+ * | =, <, >, <=, >=, <>, !=, IS, LIKE, IN                    | comparion                            |
+ * | !, NOT                                                   | logical negation                     |
+ * | AND                                                      | conjunction                          |
+ * | OR                                                       | inclusion                            |
+ * ---------------------------------------------------------------------------------------------------
+ */
+
+expr
+  = or_expr
+
+or_expr
+  = head:and_expr tail:(__ KW_OR __ and_expr)* {
+      return createBinaryExprChain(head, tail);
+    }
+
+and_expr
+  = head:not_expr tail:(__ KW_AND __ not_expr)* {
+      return createBinaryExprChain(head, tail);
+    }
+
+//here we should use `NOT` instead of `comparision_expr` to support chain-expr
+not_expr
+  = comparison_expr
+  / exists_expr
+  / (KW_NOT / "!" !"=") __ expr:not_expr {
+      return createUnaryExpr('NOT', expr);
+    }
+
+comparison_expr
+  = left:additive_expr __ rh:comparison_op_right? {
+      if (rh === null) return left;
+      else if (rh.type === 'arithmetic') return createBinaryExprChain(left, rh.tail);
+      else return createBinaryExpr(rh.op, left, rh.right);
+    }
+
+exists_expr
+  = op:exists_op __ LPAREN __ stmt:select_stmt __ RPAREN {
+    stmt.parentheses = true;
+    return createUnaryExpr(op, stmt);
+  }
+
+exists_op
+  = nk:(KW_NOT __ KW_EXISTS) { return nk[0] + ' ' + nk[2]; }
+  / KW_EXISTS
+
+comparison_op_right
+  = arithmetic_op_right
+  / in_op_right
+  / is_op_right
+  / like_op_right
+
+arithmetic_op_right
+  = l:(__ arithmetic_comparison_operator __ additive_expr)+ {
+      return { type: 'arithmetic', tail: l };
+    }
+
+arithmetic_comparison_operator
+  = ">=" / ">" / "<=" / "<>" / "<" / "=" / "!="
+
+is_op_right
+  = KW_IS __ right:additive_expr {
+      return { op: 'IS', right: right };
+    }
+  / (KW_IS __ KW_NOT) __ right:additive_expr {
+      return { op: 'IS NOT', right: right };
+  }
+
+like_op
+  = nk:(KW_NOT __ KW_LIKE) { return nk[0] + ' ' + nk[2]; }
+  / KW_LIKE
+
+in_op
+  = nk:(KW_NOT __ KW_IN) { return nk[0] + ' ' + nk[2]; }
+  / KW_IN
+
+like_op_right
+  = op:like_op __ right:comparison_expr {
+      return { op: op, right: right };
+    }
+
+in_op_right
+  = op:in_op __ LPAREN  __ l:expr_list __ RPAREN {
+      return { op: op, right: l };
+    }
+
+additive_expr
+  = head:multiplicative_expr
+    tail:(__ multiplicative_expr)* {
+      return createBinaryExprChain(head, tail);
+    }
+
+multiplicative_expr
+  = head:primary
+    tail:(__ primary)* {
+      return createBinaryExprChain(head, tail)
+    }
+
+primary
+  = literal
+  / column_ref
+  / LPAREN __ e:expr __ RPAREN {
+      e.parentheses = true;
+      return e;
+    }
+  / LPAREN __ list:expr_list __ RPAREN {
+        list.parentheses = true;
+        return list;
+    }  
+
+column_ref
+  = tbl:ident __ DOT __ col:column {
+      return {
+        type: 'column_ref',
+        column: col
+      };
+    }
+  / col:column {
+      return {
+        type: 'column_ref',
+        column: col
+      };
+    }
+
+column_list
+  = head:column tail:(__ COMMA __ column)* {
+      return createList(head, tail);
+    }
+
+ident
+  = name:ident_name !{ return isReserved[name.toUpperCase()] === true; } {
+      return name;
+    }
+  / name:quoted_ident {
+      return name;
+    }
+
+quoted_ident
+  = double_quoted_ident
+  / single_quoted_ident
+  / backticks_quoted_ident
+
+double_quoted_ident
+  = '"' chars:[^"]+ '"' { return chars.join(''); }
+
+single_quoted_ident
+  = "'" chars:[^']+ "'" { return chars.join(''); }
+
+backticks_quoted_ident
+  = "`" chars:[^`]+ "`" { return chars.join(''); }
+
+column
+  = name:column_name !{ return isReserved[name.toUpperCase()] === true; } { return name; }
+  / quoted_ident
+
+column_name
+  =  start:ident_start parts:column_part* { return start + parts.join(''); }
+
+ident_name
+  =  start:ident_start parts:ident_part* { return start + parts.join(''); }
+
+ident_start = [A-Za-z_]
+
+ident_part  = [A-Za-z0-9_]
+
+// to support column name like `cf1:name`, used to represent object properties e.g.: person.name -> person:name
+column_part  = [A-Za-z0-9_:]
+
+star_expr
+  = "*" { return { type: 'star', value: '*' }; }
+
+
 //////////////////////////////////////////////// KEYWORDS ////////////////////////////////////////////////
 
 KW_NULL     = "NULL"i       !ident_start
