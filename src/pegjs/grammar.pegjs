@@ -41,6 +41,7 @@
 
     'WHERE': true
   };
+
   //////////////////////////////////////////////// UTILITY FCTS ////////////////////////////////////////////////
 
   function createUnaryExpr(op, e) {
@@ -451,7 +452,6 @@ hexDigit
 e
   = e:[eE] sign:[+-]? { return e + (sign !== null ? sign: ''); }
 
-
 //////////////////////////////////////////////// KEYWORDS ////////////////////////////////////////////////
 
 KW_NULL     = "NULL"i       !ident_start
@@ -481,3 +481,30 @@ KW_EXISTS   = "EXISTS"i     !ident_start { return 'EXISTS'; }
 KW_NOT      = "NOT"i        !ident_start { return 'NOT'; }
 KW_AND      = "AND"i        !ident_start { return 'AND'; }
 KW_OR       = "OR"i         !ident_start { return 'OR'; }
+
+//////////////////////////////////////////////// SPECAL CHARACTERS ////////////////////////////////////////////////
+
+DOT       = '.'
+COMMA     = ','
+STAR      = '*'
+LPAREN    = '('
+RPAREN    = ')'
+
+LBRAKE    = '['
+RBRAKE    = ']'
+
+//////////////////////////////////////////////// SEPARATORS ////////////////////////////////////////////////
+__
+  = (whitespace)*
+
+
+char = .
+
+whitespace =
+  [ \t\n\r]
+
+EOL
+  = EOF
+  / [\n\r]+
+
+EOF = !.
