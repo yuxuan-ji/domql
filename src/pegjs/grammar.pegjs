@@ -101,6 +101,30 @@
   var varList = [];
 }
 
+//////////////////////////////////////////////// STATEMENTS ////////////////////////////////////////////////
+
+start
+  = select_stmt
+
+select_stmt
+  = __ KW_SELECT __
+    c:column_clause     __
+    f:from_clause?      __
+    w:where_clause?     __
+    g:group_by_clause?  __
+    o:order_by_clause?  __
+    l:limit_clause? {
+      return {
+        type: 'select',
+        columns: c,
+        from: f,
+        where: w,
+        groupby: g,
+        orderby: o,
+        limit: l
+      };
+  }
+
 
 //////////////////////////////////////////////// KEYWORDS ////////////////////////////////////////////////
 
