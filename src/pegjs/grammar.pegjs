@@ -3,6 +3,45 @@
  * with DOMQL's language specification.
  */
 
+{
+  //////////////////////////////////////////////// UTILITY VARS ////////////////////////////////////////////////
+
+  var isReserved = {
+    'AND': true,
+    'ASC': true,
+
+    'BY': true,
+
+    'CONTAINS': true,
+
+    'DESC': true,
+
+    'EXISTS': true,
+
+    'FALSE': true,
+    'FROM': true,
+
+    'GROUP': true,
+
+    'IN': true,
+    'IS': true,
+
+    'LIKE': true,
+    'LIMIT': true,
+
+    'NOT': true,
+    'NULL': true,
+
+    'OR': true,
+    'ORDER': true,
+
+    'SELECT': true,
+
+    'TRUE': true,
+
+    'WHERE': true
+  };
+}
 
 //////////////////////////////////////////////// KEYWORDS ////////////////////////////////////////////////
 
