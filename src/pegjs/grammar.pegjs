@@ -364,6 +364,93 @@ column_part  = [A-Za-z0-9_:]
 star_expr
   = "*" { return { type: 'star', value: '*' }; }
 
+//////////////////////////////////////////////// DATA TYPES ////////////////////////////////////////////////
+
+literal
+  = literal_string
+  / literal_numeric
+  / literal_bool
+  / literal_null
+
+literal_list
+  = head:literal tail:(__ COMMA __ literal)* {
+      return createList(head, tail);
+    }
+
+literal_null
+  = KW_NULL {
+      return { type: 'null', value: null };
+    }
+
+literal_bool
+  = KW_TRUE {
+      return { type: 'bool', value: true };
+    }
+  / KW_FALSE {
+      return { type: 'bool', value: false };
+    }
+
+literal_string
+  = ca:("'" single_char* "'") {
+      return {
+        type: 'string',
+        value: ca[1].join('')
+      };
+    }
+
+single_char
+  = [^'\\\0-\x1F\x7f]
+  / escape_char
+
+escape_char
+  = "\\'"  { return "'";  }
+  / '\\"'  { return '"';  }
+  / "\\\\" { return "\\"; }
+  / "\\/"  { return "/";  }
+  / "\\b"  { return "\b"; }
+  / "\\f"  { return "\f"; }
+  / "\\n"  { return "\n"; }
+  / "\\r"  { return "\r"; }
+  / "\\t"  { return "\t"; }
+  / "\\u" h1:hexDigit h2:hexDigit h3:hexDigit h4:hexDigit {
+      return String.fromCharCode(parseInt("0x" + h1 + h2 + h3 + h4));
+    }
+
+line_terminator
+  = [\n\r]
+
+literal_numeric
+  = n:number {
+      return { type: 'number', value: n };
+    }
+
+number
+  = int_:int frac:frac exp:exp __ { return parseFloat(int_ + frac + exp); }
+  / int_:int frac:frac __         { return parseFloat(int_ + frac); }
+  / int_:int exp:exp __           { return parseFloat(int_ + exp); }
+  / int_:int __                   { return parseFloat(int_); }
+
+int
+  = digits
+  / digit:digit
+
+frac
+  = "." digits:digits { return "." + digits; }
+
+exp
+  = e:e digits:digits { return e + digits; }
+
+digits
+  = digits:digit+ { return digits.join(""); }
+
+digit   = [0-9]
+
+hexDigit
+  = [0-9a-fA-F]
+
+e
+  = e:[eE] sign:[+-]? { return e + (sign !== null ? sign: ''); }
+
 
 //////////////////////////////////////////////// KEYWORDS ////////////////////////////////////////////////
 
