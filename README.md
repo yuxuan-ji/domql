@@ -73,7 +73,7 @@ Please make sure to update tests as appropriate.
 
 # Documentation
 
-Documentation is generated with JsDoc and jsdoc2md and located in docs/api.md. Run:
+Documentation is generated with JsDoc and jsdoc2md. Run:
 ```sh
 bash docs/docs.sh
 ```
