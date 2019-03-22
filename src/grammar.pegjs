@@ -318,6 +318,7 @@ column_ref
   = tbl:ident __ DOT __ col:column {
       return {
         type: 'column_ref',
+        table: tbl,
         column: col
       };
     }
