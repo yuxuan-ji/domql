@@ -20,7 +20,7 @@ var result = cursor.execute();
 From script:
 
 ```html
-<script src="domql.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/yuxuan-ji/domql/lib/domql.min.js"></script>
 
 <script>
     var cursor = new domql.Domql("SELECT * FROM html WHERE id='foo'");
