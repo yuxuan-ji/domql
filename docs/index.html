@@ -1,20 +1,99 @@
-<!doctype html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src="https://cdn.jsdelivr.net/gh/yuxuan-ji/domql/lib/domql.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.9.0/beautify-html.min.js"></script>
-        <script src="https://cdnjs.com/libraries/awesomplete"></script>
-        <script src="  https://cdn.jsdelivr.net/npm/showdown@1.9.0/dist/showdown.min.js"></script>
-        <title>domql playground</title>
-    </head>
-    <body>
-        <h1 id="">DOMQL Playground</h1>
-        <div id="html-mdown"></div>
-        <div id="searchbox"></div>
-        <div id="outp-mdown"></div>
-        <script src="index.js"></script>
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+  <title>DOMQL</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- CSS for the template -->
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- Code highlighting with highlight.js -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+
+  <!-- Markdown renderer -->
+  <script src="https://cdn.jsdelivr.net/npm/showdown@1.9.0/dist/showdown.min.js"></script>
+
+  <!-- HTML beautifier -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.9.0/beautify-html.min.js"></script>
+
+  <!-- Any other libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.4/awesomplete.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.4/awesomplete.min.css">
+
+  <!-- Project library -->
+  <script src="https://cdn.jsdelivr.net/gh/yuxuan-ji/domql/lib/domql.min.js"></script>
+
+  <!-- Custom scripts -->
+  <script src="index.js"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="index.css">
+
+  <body>
+
+  <!-- Navbar -->
+  <div class="w3-top">
+    <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
+      <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars"></i></a>
+      <a href="https://github.com/yuxuan-ji/domql" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Github</a>
+      <a href="https://github.com/yuxuan-ji/domql/tree/master/src" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Docs</a>
+      <a href="https://github.com/yuxuan-ji/domql/releases" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Download</a>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <nav class="w3-sidebar w3-bar-block w3-collapse w3-large w3-theme-l5 w3-animate-left" id="sidebar">
+    <a href="javascript:void(0)" onclick="w3_close()" class="w3-right w3-xlarge w3-padding-large w3-hover-black w3-hide-large" title="Close Menu">
+      <i class="fa fa-remove"></i>
+    </a>
+    <h4 class="w3-bar-item"><b>DOMQL</b></h4>
+    <a class="w3-bar-item w3-button w3-hover-black" href="#description">Description</a>
+    <a class="w3-bar-item w3-button w3-hover-black" href="#demo">Demo</a>
+  </nav>
+
+  <!-- Overlay effect when opening sidebar on small screens -->
+  <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="overlay"></div>
+
+  <!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
+  <div class="w3-main" style="margin-left:250px">
+
+    <div id="description" class="w3-row w3-padding-64">
+      <div class="w3-container">
+        <h1 class="w3-text-teal">DOMQL</h1>
+        <p>TODO</p>
+      </div>
+    </div>
+
+    <div id="demo" class="w3-row w3-padding-64">
+      <div class="w3-container">
+        <h1 class="w3-text-teal">Demo</h1>
+        <p>
+          The library is loaded in this page. Try it out on this page's HTML!
+
+          <div class="searchbox awesomplete">
+            <input class="dropdown-input" data-list="#domql-suggestions" style="width:40em" />
+            <button class="search-btn" onclick="domqlsearch()" type="button"><span class="fa fa-search"></span></button>
+            <button class="dropdown-btn" type="button"><span class="caret"></span></button>
+            <ul style="display:none;" id="domql-suggestions">
+              <li>SELECT * FROM div WHERE id='demo1'</li>
+              <li>SELECT * FROM .demo2 LIMIT 1</li>
+              <li>SELECT * FROM html</li>
+            </ul>
+          </div>
+          
+          <div id="demo-targets" style="display: none">
+            <div id="demo1">Get this div by id! (demo1)</div>
+            <p class="demo2">Get this p by class! (demo2)</p>
+          </div>
+          <pre><code id="domql-output"></div></code></pre>
+          <pre><code id="current-page-html"></div></code></pre>
+        </p>
+      </div>
+    </div>
+
+  </body>
 </html>
