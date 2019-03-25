@@ -63,7 +63,7 @@ function domqlsearch(query) {
 
   var outp = document.querySelector('#domql-output');
 
-  var content = result ? html_beautify(result.innerHTML, {indent_size: 2}) : null;
+  var content = result ? html_beautify(result.innerHTML, {indent_size: 2}) : "null";
   outp.innerText = content;  
 
   hljs.highlightBlock(outp);
