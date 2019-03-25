@@ -64,15 +64,42 @@
     <div id="description" class="w3-row w3-padding-64">
       <div class="w3-container">
         <h1 class="w3-text-teal">DOMQL</h1>
-        <p>TODO</p>
+        <p>
+        Tired of using document.querySelector() with CSS selectors? Ever wanted to use SQL-like syntax to query DOM elements?<br/>
+        Yeah, me neither.<br/>
+        <br/>
+        To use the library, simply use one the following methods to import the library.<br/>
+        To compile a query, use the <b>domql.Domql</b> constructor<br/>
+        To run a compiled query, use the <b>.execute()</b> method.<br/>
+        <br/>
+        ES6:
+
+        <pre><code>
+        import Domql from './domql.min.js';
+        var cursor = new Domql("SELECT * FROM html WHERE id='foo'");
+        var result = cursor.execute();
+        </code></pre>
+
+        From script:
+
+        <pre><code>
+        &lt;script src="https://cdn.jsdelivr.net/gh/yuxuan-ji/domql@master/lib/domql.min.js"&gt;&lt;/script&gt;
+
+        &lt;script&gt;
+            var cursor = new domql.Domql("SELECT * FROM html WHERE id='foo'");
+            var result = cursor.execute();
+        &lt;/script&gt;
+        </code></pre>
+
+        </p>
       </div>
     </div>
 
-    <div id="demo" class="w3-row w3-padding-64">
+    <div id="demo" class="w3-row w3-padding-32">
       <div class="w3-container">
         <h1 class="w3-text-teal">Demo</h1>
         <p>
-          The library is loaded in this page. Try it out on this page's HTML!
+          The DOMQL library is loaded in this page. Try it out on this page's HTML!
 
           <div class="searchbox awesomplete">
             <input class="dropdown-input" data-list="#domql-suggestions" style="width:40em" />
