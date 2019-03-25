@@ -30,8 +30,10 @@ export class Domql {
    */
   compile(query = null) {
     this._query = query;
+    if (!query) return null;
     var ast = parse(query);
     this._directives = transpile(ast);
+    return utils.execute(this._directives);
   }
 
   /**
