@@ -62,9 +62,18 @@ function domqlsearch() {
   var cursor = new domql.Domql(query);
   var result = cursor.execute();
 
+  var out = "";
+  if (result instanceof NodeList) {
+      result.forEach(function(node) {
+          out += node.outerHTML;
+      });
+  } else {
+      out = result ? result.outerHTML : null;
+  }
+
   var outp = document.querySelector('#domql-output');
 
-  var content = result ? html_beautify(result.innerHTML, {indent_size: 2}) : "null";
+  var content = out ? html_beautify(out, {indent_size: 2}) : "null";
   outp.innerText = content;  
 
   hljs.highlightBlock(outp);
