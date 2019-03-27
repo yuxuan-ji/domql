@@ -8,34 +8,39 @@ function _traverseFrom(node) {
   return tables;
 }
 
-function _augmentWhere(node, tables, parent = null) {
+function _augmentWhere(node, tables) {
 
-  if (!node) return;
+  var firstTable = tables.entries().next().value[0];
 
-  if (node.type === "binary_expr") {
+  function recurse(node, parent = null) {
+    if (!node) return;
 
-    if (node.operator === "AND" || node.operator === "OR") {
-      _augmentWhere(node.left, tables, node.operator);
-      _augmentWhere(node.right, tables, node.operator);
+    if (node.type === "binary_expr") {
 
-    } else if (node.operator === "=") {
-      if (node.left.table === null) node.left.table = "*";
-      if (!tables.has(node.left.table)) throw Error(`Table ${node.left.table} was not specified in FROM statement`);
-      var table = node.left.table;
-      var column = node.left.column;
-      var value = node.right.column || node.right.value;
-      node["selector"] = {
-        table: table,
-        selector: `[${column}="${value}"]`
-      };
-      node.type = "selector";
-      delete node.left;
-      delete node.right;
-      delete node.operator;
+      if (node.operator === "AND" || node.operator === "OR") {
+        _augmentWhere(node.left, tables, node.operator);
+        _augmentWhere(node.right, tables, node.operator);
+
+      } else if (node.operator === "=") {
+        if (!node.left.table) node.left.table = firstTable;
+        if (!tables.has(node.left.table)) throw Error(`Table ${node.left.table} was not specified in FROM statement`);
+        var table = node.left.table;
+        var column = node.left.column;
+        var value = node.right.column || node.right.value;
+        node["selector"] = {
+          table: table,
+          selector: `[${column}="${value}"]`
+        };
+        node.type = "selector";
+        delete node.left;
+        delete node.right;
+        delete node.operator;
+      }
     }
+    node.parent = parent;
   }
 
-  node.parent = parent;
+  recurse(node);
 }
 
 function _traverseWhere(node, selectors) {
