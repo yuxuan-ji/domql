@@ -75,6 +75,20 @@ function _traverseWhere(node, selectors) {
   recurse(node);
 }
 
+function _compileSelectors(selectors) {
+  var outp = [];
+  for (var key in selectors) {
+    var selector = "";
+    for (var i = 0; i < selectors[key].length; i++) {
+      selector += key + selectors[key][i];
+      if (i < selectors[key].length - 1) selector += ", ";
+    }
+    outp.push(selector);
+  }
+
+  return outp.join(", ");
+}
+
 /**
  * Traverses the given Abstract Syntax Tree
  * and generates a set of directives
@@ -92,5 +106,13 @@ export function transpile(ast) {
   });
 
   _traverseWhere(ast.where, selectors);
-  return undefined;
+
+  var compiled = _compileSelectors(selectors);
+
+  var directives = [compiled];
+
+  if (ast.limit.value === 1) directives.push(document.querySelector.bind(document));
+  else directives.push(document.querySelectorAll.bind(document));
+
+  return directives;
 }
