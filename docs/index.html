@@ -110,6 +110,8 @@
               <li>SELECT * FROM p WHERE p.class='demo2' LIMIT 1</li>
               <li>SELECT * FROM a WHERE a.target='_blank' LIMIT 1</li>
               <li>SELECT * FROM h1 WHERE h1.title='demo4' LIMIT 1</li>
+              <li>SELECT * FROM h1, div WHERE div.id='demo1' AND (h1.title='demo4' OR h1.title='foo')</li>
+              <li>SELECT * FROM h1, a, p, div WHERE p.class='demo2' AND a.target='_blank' AND h1.title='demo4' AND div.id='demo1'</li>
               <li>SELECT * FROM html</li>
             </ul>
           </div>
