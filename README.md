@@ -40,6 +40,12 @@ Install Dependencies:
 npm install
 ```
 
+Build PegJS grammar:
+
+```sh
+bash build_grammar.sh
+```
+
 Build lib:
 
 ```sh
@@ -74,8 +80,9 @@ Please make sure to update tests as appropriate.
 # Documentation
 
 Documentation is generated with JsDoc and jsdoc2md. Run:
+
 ```sh
-bash docs/docs.sh
+bash docs.sh
 ```
 to generate the documentation automatically from your JsDoc comments.
 
