@@ -65,7 +65,7 @@ function domqlsearch() {
   var out = "";
   if (result instanceof NodeList) {
       result.forEach(function(node) {
-          out += node.outerHTML;
+          out += node.outerHTML + '\n';
       });
   } else {
       out = result ? result.outerHTML : null;
