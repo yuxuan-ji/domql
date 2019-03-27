@@ -35,6 +35,46 @@ function _augmentWhere(node, tables, parent = null) {
   node.parent = parent;
 }
 
+function _traverseWhere(node, selectors) {
+
+  var pushNew = false;
+  var pushCopy = false;
+
+  function recurse(node) {
+    if (node.type === "selector") {
+      var selector = selectors[node.selector.table];
+      if (pushCopy) {
+        selector.push(selector[selector.length - 1]);
+        pushCopy = false;
+        selector[selector.length - 2] += node.selector.selector;
+        return;
+
+      } else if (pushNew) {
+        selector.push("");
+        pushNew = false;
+      }
+      selector[selector.length - 1] += node.selector.selector;
+    }
+    if (node.type === "binary_expr") {
+      var left = node.left;
+      var right = node.right;
+
+      if (node.operator === "AND") {
+        recurse(left);
+        recurse(right);
+
+      } else if (node.operator === "OR") {
+        if (node.parent === "AND") pushCopy = true;
+        recurse(left);
+        if (node.parent !== "AND") pushNew = true;
+        recurse(right);
+      }
+    }
+  }
+
+  recurse(node);
+}
+
 /**
  * Traverses the given Abstract Syntax Tree
  * and generates a set of directives
