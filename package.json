@@ -5,6 +5,7 @@
   "main": "lib/domql.js",
   "scripts": {
     "build": "bash build_grammar.sh && webpack --env dev && webpack --env build",
+    "build:dev": "webpack --env dev",
     "dev": "webpack --progress --colors --watch --env dev",
     "test": "mocha --require babel-register --colors ./test/*.spec.js",
     "test:watch": "mocha --require babel-register --colors -w ./test/*.spec.js",
