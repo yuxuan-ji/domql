@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 converter = new showdown.Converter({'ghCodeBlocks': true});
 
 document.addEventListener('DOMContentLoaded', function(event) {
-  var content = html_beautify(document.querySelector('*').innerHTML, {indent_size: 2});
+  var content = html_beautify(document.querySelector('#demo-targets').innerHTML, {indent_size: 2});
   document.getElementById("current-page-html").innerText = content;
 });
 

@@ -25,7 +25,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.4/awesomplete.min.css">
 
   <!-- Project library -->
-  <script src="https://cdn.jsdelivr.net/gh/yuxuan-ji/domql/lib/domql.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/yuxuan-ji/domql@master/lib/domql.js"></script>
 
   <!-- Custom scripts -->
   <script src="index.js"></script>
@@ -108,13 +108,18 @@
             <ul style="display:none;" id="domql-suggestions">
               <li>SELECT * FROM div WHERE div.id='demo1'</li>
               <li>SELECT * FROM p WHERE p.class='demo2' LIMIT 1</li>
+              <li>SELECT * FROM a WHERE a.target='_blank' LIMIT 1</li>
+              <li>SELECT * FROM h1 WHERE h1.title='demo4' LIMIT 1</li>
               <li>SELECT * FROM html</li>
             </ul>
           </div>
           
           <div id="demo-targets" style="display: none">
+            Here's a list of HTML elements in this page's markup, try querying them!
             <div id="demo1">Get this div by id! (demo1)</div>
             <p class="demo2">Get this p by class! (demo2)</p>
+            <a target="_blank">Get this a by target! (demo3)</a>
+            <h1 title="demo4">Get this h1 by title! (demo4)</h1>
           </div>
             <pre><code id="domql-output"></code></pre>
             <pre><code id="current-page-html"></div></code></pre>
