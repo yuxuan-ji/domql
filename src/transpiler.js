@@ -9,6 +9,9 @@ function _traverseFrom(node) {
 }
 
 function _augmentWhere(node, tables, parent = null) {
+
+  if (!node) return;
+
   if (node.type === "binary_expr") {
 
     if (node.operator === "AND" || node.operator === "OR") {
@@ -36,6 +39,8 @@ function _augmentWhere(node, tables, parent = null) {
 }
 
 function _traverseWhere(node, selectors) {
+
+  if (!node) return;
 
   var pushNew = false;
   var pushCopy = false;
@@ -111,7 +116,7 @@ export function transpile(ast) {
 
   var directives = [compiled];
 
-  if (ast.limit.value === 1) directives.push(document.querySelector.bind(document));
+  if (ast.limit && ast.limit.value === 1) directives.push(document.querySelector.bind(document));
   else directives.push(document.querySelectorAll.bind(document));
 
   return directives;
