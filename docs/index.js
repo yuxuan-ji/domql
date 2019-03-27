@@ -57,7 +57,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
 });
 
 // Function to output domql output
-function domqlsearch(query) {
+function domqlsearch() {
+  var query = document.getElementById("domql-search").value;
   var cursor = new domql.Domql(query);
   var result = cursor.execute();
 
