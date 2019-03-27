@@ -40,12 +40,6 @@ Install Dependencies:
 npm install
 ```
 
-Build PegJS grammar:
-
-```sh
-bash build_grammar.sh
-```
-
 Build lib:
 
 ```sh
