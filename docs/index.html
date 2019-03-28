@@ -25,7 +25,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.4/awesomplete.min.css">
 
   <!-- Project library -->
-  <script src="../lib/domql.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/yuxuan-ji/domql@master/lib/domql.js"></script>
 
   <!-- Custom scripts -->
   <script src="index.js"></script>
@@ -76,7 +76,7 @@
 
         <pre><code>
         import Domql from './domql.min.js';
-        var cursor = new Domql("SELECT * FROM html WHERE id='foo'");
+        var cursor = new Domql("SELECT * FROM div WHERE id='foo'");
         var result = cursor.execute();
         </code></pre>
 
@@ -86,7 +86,7 @@
         &lt;script src="https://cdn.jsdelivr.net/gh/yuxuan-ji/domql@master/lib/domql.min.js"&gt;&lt;/script&gt;
 
         &lt;script&gt;
-            var cursor = new domql.Domql("SELECT * FROM html WHERE id='foo'");
+            var cursor = new domql.Domql("SELECT * FROM div WHERE id='foo'");
             var result = cursor.execute();
         &lt;/script&gt;
         </code></pre>
