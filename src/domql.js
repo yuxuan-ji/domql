@@ -9,7 +9,7 @@ export class Domql {
 
   /**
    * Initialize a Domql object with the input query.
-   * @param  {string} query
+   * @param  {String} query
    */
   constructor(query = null) {
     this._name = 'Domql';
@@ -26,7 +26,7 @@ export class Domql {
 
   /**
    * Compile user query into a set of directives
-   * @param  {string} query
+   * @param  {String} query
    */
   compile(query = null) {
     this._query = query;
@@ -37,7 +37,7 @@ export class Domql {
 
   /**
    * Execute compiled set of directives and
-   * returns a NodeList or a DOM Element or null if not found
+   * returns a NodeList or an Element or null if not found
    * @return {NodeList|Element}
    */
   execute() {

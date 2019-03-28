@@ -1,4 +1,9 @@
-function _traverseFrom(node) {
+/**
+ * Traverse the From clause of the AST and return a Set containing the listed tables
+ * @param  {Object} node The From clause of the AST
+ * @return {Set} Set containing the tables listed in the From clause
+ */
+function _getTableReferences(node) {
   var tables = new Set();
   node.forEach(function (table) {
     if (table.type !== "table_ref") throw new Error(`Expected ${table} to be a table_ref`);
@@ -8,6 +13,12 @@ function _traverseFrom(node) {
   return tables;
 }
 
+/**
+ * Traverse and augment the Where clause of the AST, and check if conditions using a table reference
+ * are valid
+ * @param  {Object} node   The Where clause of the AST
+ * @param  {Set} tables Set containing the tables listed in the From clause
+ */
 function _augmentWhere(node, tables) {
 
   var firstTable = tables.entries().next().value[0];
@@ -43,7 +54,12 @@ function _augmentWhere(node, tables) {
   recurse(node);
 }
 
-function _traverseWhere(node, selectors) {
+/**
+ * Traverse the augmented Where clause and generate corresponding CSS selectors
+ * @param  {Object} node      The augmented Where clause of the AST
+ * @param  {Object} selectors Map of tables to their generated selectors
+ */
+function _constructSelectors(node, selectors) {
 
   if (!node) return;
 
@@ -85,6 +101,11 @@ function _traverseWhere(node, selectors) {
   recurse(node);
 }
 
+/**
+ * Reduce the selectors map into one DOMString
+ * @param  {Object} selectors
+ * @return {String} compiled DOMString
+ */
 function _compileSelectors(selectors) {
   var outp = [];
   for (var key in selectors) {
@@ -103,11 +124,11 @@ function _compileSelectors(selectors) {
  * Traverses the given Abstract Syntax Tree
  * and generates a set of directives
  * @param  {Object} ast
- * @return {List<string|function>}
+ * @return {List<String|Function>}
  */
 export function transpile(ast) {
 
-  var tables = _traverseFrom(ast.from);
+  var tables = _getTableReferences(ast.from);
   _augmentWhere(ast.where, tables);
 
   var selectors = {};
@@ -115,7 +136,7 @@ export function transpile(ast) {
     selectors[table] = [""];
   });
 
-  _traverseWhere(ast.where, selectors);
+  _constructSelectors(ast.where, selectors);
 
   var compiled = _compileSelectors(selectors);
 
