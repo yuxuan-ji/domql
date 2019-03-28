@@ -153,11 +153,8 @@ table_ref
   = __ COMMA __ t:table_name { return t; }
 
 table_name
-  = dt:ident tail:(__ DOT __ ident)? {
+  = dt:ident {
       var obj = { type: 'table_ref', table: dt };
-      if (tail !== null) {
-        obj.table = tail[3];
-      }
       return obj;
     }
 
@@ -335,7 +332,8 @@ column_list
     }
 
 ident
-  = name:ident_name !{ return isReserved[name.toUpperCase()] === true; } {
+  = (STAR !ident_start) { return '*' }
+  / name:ident_name !{ return isReserved[name.toUpperCase()] === true; } {
       return name;
     }
   / name:quoted_ident {
@@ -368,7 +366,7 @@ ident_name
 
 ident_start = [A-Za-z_]
 
-ident_part  = [A-Za-z0-9_]
+ident_part  = [A-Za-z0-9_\.]
 
 // to support column name like `cf1:name`, used to represent object properties e.g.: person.name -> person:name
 column_part  = [A-Za-z0-9_:]
