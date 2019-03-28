@@ -58,17 +58,21 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 // Function to output domql output
 function domqlsearch() {
-  var query = document.getElementById("domql-search").value;
-  var cursor = new domql.Domql(query);
-  var result = cursor.execute();
-
   var out = "";
-  if (result instanceof NodeList) {
-      result.forEach(function(node) {
-          out += node.outerHTML + '\n';
-      });
-  } else {
-      out = result ? result.outerHTML : null;
+  var query = document.getElementById("domql-search").value;
+  try {
+    var cursor = new domql.Domql(query);
+    var result = cursor.execute();
+
+    if (result instanceof NodeList) {
+        result.forEach(function(node) {
+            out += node.outerHTML + '\n';
+        });
+    } else {
+        out = result ? result.outerHTML : null;
+    }
+  } catch (error) {
+    out = error.message;
   }
 
   var outp = document.querySelector('#domql-output');
