@@ -25,7 +25,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.4/awesomplete.min.css">
 
   <!-- Project library -->
-  <script src="https://cdn.jsdelivr.net/gh/yuxuan-ji/domql@master/lib/domql.js"></script>
+  <script src="../lib/domql.js"></script>
 
   <!-- Custom scripts -->
   <script src="index.js"></script>
@@ -112,6 +112,7 @@
               <li>SELECT * FROM h1 WHERE h1.title='demo4' LIMIT 1</li>
               <li>SELECT * FROM h1, div WHERE div.id='demo1' AND (h1.title='demo4' OR h1.title='foo')</li>
               <li>SELECT * FROM h1, a, p, div WHERE p.class='demo2' AND a.target='_blank' AND h1.title='demo4' AND div.id='demo1'</li>
+              <li>SELECT * FROM * WHERE id="demo-targets"</li>
               <li>SELECT * FROM html</li>
             </ul>
           </div>
