@@ -27,10 +27,13 @@ From script:
     var result = cursor.execute();
 </script>
 ```
+## Demo
+
+_A demo is available in the [Demo Page][demo]._
 
 ## More examples
 
-_For even more examples and usage, please refer to the [Wiki][wiki]._
+_For even more examples and usage, please refer to the [Examples Page][examples]._
 
 ## Development setup
 
@@ -81,4 +84,5 @@ bash docs.sh
 to generate the documentation automatically from your JsDoc comments.
 
 <!-- Markdown link & img dfn's -->
-[wiki]: https://github.com/yuxuan-ji/domql/wiki
+[examples]: https://yuxuan-ji.github.io/domql/#examples
+[demo]: https://yuxuan-ji.github.io/domql/#demo
