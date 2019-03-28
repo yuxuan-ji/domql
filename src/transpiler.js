@@ -76,7 +76,7 @@ function _constructSelectors(node, selectors) {
         return;
 
       } else if (pushNew) {
-        selector.push("");
+        if (selector[selector.length - 1] !== "") selector.push("");
         pushNew = false;
       }
       selector[selector.length - 1] += node.selector.selector;
