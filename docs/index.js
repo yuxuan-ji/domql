@@ -1,28 +1,31 @@
 // Sidebar button
-document.addEventListener('DOMContentLoaded', function(event) {
+// Toggle between showing and hiding the sidebar, and add overlay effect
+function w3_open() {
   // Get the Sidebar
   var sidebar = document.getElementById("sidebar");
 
   // Get the DIV with overlay effect
-  var overlayBg = document.getElementById("overlay");
-
-  // Toggle between showing and hiding the sidebar, and add overlay effect
-  function w3_open() {
-    if (sidebar.style.display === 'block') {
-      sidebar.style.display = 'none';
-      overlayBg.style.display = "none";
-    } else {
-      sidebar.style.display = 'block';
-      overlayBg.style.display = "block";
-    }
-  }
-
-  // Close the sidebar with the close button
-  function w3_close() {
-    sidebar.style.display = "none";
+  var overlayBg = document.getElementById("overlay");    
+  if (sidebar.style.display === 'block') {
+    sidebar.style.display = 'none';
     overlayBg.style.display = "none";
+  } else {
+    sidebar.style.display = 'block';
+    overlayBg.style.display = "block";
   }
-});
+}
+
+// Close the sidebar with the close button
+function w3_close() {
+  // Get the Sidebar
+  var sidebar = document.getElementById("sidebar");
+
+  // Get the DIV with overlay effect
+  var overlayBg = document.getElementById("overlay");    
+  sidebar.style.display = "none";
+  overlayBg.style.display = "none";
+}
+
 
 // Set current page markup to innerHTML
 converter = new showdown.Converter({'ghCodeBlocks': true});
