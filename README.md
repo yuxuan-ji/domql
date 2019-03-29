@@ -13,7 +13,7 @@ ES6:
 
 ```javascript
 import Domql from './domql.min.js';
-var cursor = new Domql("SELECT * FROM div WHERE id='foo'");
+var cursor = new Domql("SELECT * FROM html WHERE id='foo'");
 var result = cursor.execute();
 ```
 
@@ -23,7 +23,7 @@ From script:
 <script src="https://cdn.jsdelivr.net/gh/yuxuan-ji/domql@master/lib/domql.min.js"></script>
 
 <script>
-    var cursor = new domql.Domql("SELECT * FROM div WHERE id='foo'");
+    var cursor = new domql.Domql("SELECT * FROM html WHERE id='foo'");
     var result = cursor.execute();
 </script>
 ```

@@ -67,7 +67,7 @@ function domqlsearch() {
     var cursor = new domql.Domql(query);
     var result = cursor.execute();
 
-    if (result instanceof NodeList) {
+    if (result instanceof Array) {
         result.forEach(function(node) {
             out += node.outerHTML + '\n';
         });

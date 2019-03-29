@@ -25,7 +25,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.4/awesomplete.min.css">
 
   <!-- Project library -->
-  <script src="https://cdn.jsdelivr.net/gh/yuxuan-ji/domql@master/lib/domql.js"></script>
+  <script src="../lib/domql.js"></script>
 
   <!-- Custom scripts -->
   <script src="index.js"></script>
@@ -77,7 +77,7 @@
 
         <pre><code>
         import Domql from './domql.min.js';
-        var cursor = new Domql("SELECT * FROM div WHERE id='foo'");
+        var cursor = new Domql("SELECT * FROM html WHERE id='foo'");
         var result = cursor.execute();
         </code></pre>
 
@@ -87,7 +87,7 @@
         &lt;script src="https://cdn.jsdelivr.net/gh/yuxuan-ji/domql@master/lib/domql.min.js"&gt;&lt;/script&gt;
 
         &lt;script&gt;
-            var cursor = new domql.Domql("SELECT * FROM div WHERE id='foo'");
+            var cursor = new domql.Domql("SELECT * FROM html WHERE id='foo'");
             var result = cursor.execute();
         &lt;/script&gt;
         </code></pre>
@@ -116,13 +116,13 @@
             <button class="search-btn" onclick="domqlsearch()" type="button"><span class="fa fa-search"></span></button>
             <button class="dropdown-btn" type="button"><span class="caret"></span></button>
             <ul style="display:none;" id="domql-suggestions">
-              <li>SELECT * FROM div WHERE div.id='demo1'</li>
-              <li>SELECT * FROM p WHERE p.class='demo2' LIMIT 1</li>
-              <li>SELECT * FROM a WHERE a.target='_blank' LIMIT 1</li>
-              <li>SELECT * FROM h1 WHERE h1.title='demo4' LIMIT 1</li>
-              <li>SELECT * FROM h1, div WHERE div.id='demo1' AND (h1.title='demo4' OR h1.title='foo')</li>
-              <li>SELECT * FROM h1, a, p, div WHERE p.class='demo2' AND a.target='_blank' AND h1.title='demo4' AND div.id='demo1'</li>
-              <li>SELECT * FROM * WHERE id="demo-targets"</li>
+              <li>SELECT div FROM html WHERE div.id='demo1'</li>
+              <li>SELECT p FROM html WHERE p.class='demo2' LIMIT 1</li>
+              <li>SELECT a FROM html WHERE a.target='_blank' LIMIT 1</li>
+              <li>SELECT h1 FROM html WHERE h1.title='demo4' LIMIT 1</li>
+              <li>SELECT h1, div FROM html WHERE div.id='demo1' AND (h1.title='demo4' OR h1.title='foo')</li>
+              <li>SELECT h1, a, p, div FROM html WHERE p.class='demo2' AND a.target='_blank' AND h1.title='demo4' AND div.id='demo1'</li>
+              <li>SELECT * FROM html WHERE id="demo-targets"</li>
               <li>SELECT * FROM html</li>
             </ul>
           </div>
