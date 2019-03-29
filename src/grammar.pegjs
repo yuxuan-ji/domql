@@ -325,9 +325,7 @@ ident
   = name:ident_name !{ return isReserved[name.toUpperCase()] === true; } {
       return name;
     }
-  / name:quoted_ident {
-      return name;
-    }
+
 
 quoted_ident
   = double_quoted_ident
@@ -345,7 +343,6 @@ backticks_quoted_ident
 
 column
   = name:column_name !{ return isReserved[name.toUpperCase()] === true; } { return name; }
-  / quoted_ident
 
 column_name
   =  start:ident_start parts:column_part* { return start + parts.join(''); }
@@ -395,24 +392,6 @@ literal_string
         type: 'string',
         value: ca
       };
-    }
-
-single_char
-  = [^'\\\0-\x1F\x7f]
-  / escape_char
-
-escape_char
-  = "\\'"  { return "'";  }
-  / '\\"'  { return '"';  }
-  / "\\\\" { return "\\"; }
-  / "\\/"  { return "/";  }
-  / "\\b"  { return "\b"; }
-  / "\\f"  { return "\f"; }
-  / "\\n"  { return "\n"; }
-  / "\\r"  { return "\r"; }
-  / "\\t"  { return "\t"; }
-  / "\\u" h1:hexDigit h2:hexDigit h3:hexDigit h4:hexDigit {
-      return String.fromCharCode(parseInt("0x" + h1 + h2 + h3 + h4));
     }
 
 line_terminator
