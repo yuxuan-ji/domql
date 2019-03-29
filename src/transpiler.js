@@ -2,29 +2,29 @@ import * as sizzle from './sizzle.js';
 import {limiter} from './utils.js';
 
 /**
- * Traverse the From clause of the AST and return a Set containing the listed tables
- * @param  {Object} node The From clause of the AST
- * @return {Set} Set containing the tables listed in the From clause
+ * Traverse the Columns clause of the AST and return a Set containing the listed columns
+ * @param  {Object} node The Columns clause of the AST
+ * @return {Set} Set containing the columns listed in the From clause
  */
-function _getTableReferences(node) {
-  var tables = new Set();
-  node.forEach(function (table) {
-    if (table.type !== "table_ref") throw new Error(`Expected ${table} to be a table_ref`);
+function _getColumnReferences(node) {
+  var columns = new Set();
+  node.forEach(function (column) {
+    if (column.type !== "column_ref") throw new Error(`Expected "${column}"" to be a column_ref`);
 
-    tables.add(table.table);
+    columns.add(column.column);
   });
-  return tables;
+  return columns;
 }
 
 /**
  * Traverse and augment the Where clause of the AST, and check if conditions using a table reference
  * are valid
  * @param  {Object} node   The Where clause of the AST
- * @param  {Set} tables Set containing the tables listed in the From clause
+ * @param  {Set} columns Set containing the columns listed in the From clause
  */
-function _augmentWhere(node, tables) {
+function _augmentWhere(node, columns) {
 
-  var firstTable = tables.entries().next().value[0];
+  var firstColumn = columns.entries().next().value[0];
 
   function recurse(node, parent = null) {
     if (!node) return;
@@ -32,18 +32,26 @@ function _augmentWhere(node, tables) {
     if (node.type === "binary_expr") {
 
       if (node.operator === "AND" || node.operator === "OR") {
-        _augmentWhere(node.left, tables, node.operator);
-        _augmentWhere(node.right, tables, node.operator);
+        recurse(node.left, node.operator);
+        recurse(node.right, node.operator);
 
       } else if (node.operator === "=") {
-        if (!node.left.table) node.left.table = firstTable;
-        if (!tables.has(node.left.table)) throw Error(`Table ${node.left.table} was not specified in FROM statement`);
-        var table = node.left.table;
+        if (!node.left.field) {
+          node.left.field = node.left.column;
+          node.left.column = firstColumn;
+        }
+        if (!columns.has(node.left.column)) {
+          throw Error(`Column "${node.left.column}" was not specified in the Columns clause`);
+        }
         var column = node.left.column;
-        var value = node.right.column || node.right.value;
+        var field = node.left.field;
+        if (node.right.type !== "string" && node.right.type !== "number") {
+          throw Error(`Expected a string or number, but found ${node.right.type} instead`);
+        }
+        var value = node.right.value;
         node["selector"] = {
-          table: table,
-          selector: `[${column}="${value}"]`
+          table: column,
+          selector: `[${field}="${value}"]`
         };
         node.type = "selector";
         delete node.left;
@@ -60,7 +68,7 @@ function _augmentWhere(node, tables) {
 /**
  * Traverse the augmented Where clause and generate corresponding CSS selectors
  * @param  {Object} node      The augmented Where clause of the AST
- * @param  {Object} selectors Map of tables to their generated selectors
+ * @param  {Object} selectors Map of columns to their generated selectors
  */
 function _constructSelectors(node, selectors) {
 
@@ -107,14 +115,17 @@ function _constructSelectors(node, selectors) {
 /**
  * Reduce the selectors map into one DOMString
  * @param  {Object} selectors
+ * @param  {String} scope the upmost parent
  * @return {String} compiled DOMString
  */
-function _compileSelectors(selectors) {
+function _compileSelectors(selectors, scope) {
+  scope = scope === "html" ? '' : scope + " ";
+
   var outp = [];
   for (var key in selectors) {
     var selector = "";
     for (var i = 0; i < selectors[key].length; i++) {
-      selector += key + selectors[key][i];
+      selector += scope + key + selectors[key][i];
       if (i < selectors[key].length - 1) selector += ", ";
     }
     outp.push(selector);
@@ -131,17 +142,19 @@ function _compileSelectors(selectors) {
  */
 export function transpile(ast) {
 
-  var tables = _getTableReferences(ast.from);
-  _augmentWhere(ast.where, tables);
+  var columns = _getColumnReferences(ast.columns);
+  var scope = ast.from.table;
+
+  _augmentWhere(ast.where, columns);
 
   var selectors = {};
-  tables.forEach(function (table) {
+  columns.forEach(function (table) {
     selectors[table] = [""];
   });
 
   _constructSelectors(ast.where, selectors);
 
-  var compiled = _compileSelectors(selectors);
+  var compiled = _compileSelectors(selectors, scope);
 
   var directives = [compiled];
 
