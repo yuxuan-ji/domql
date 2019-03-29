@@ -12,17 +12,17 @@
 <dt><a href="#parse">parse(query)</a> ⇒ <code>Object</code></dt>
 <dd><p>Parse a query into an Abstract Syntax Tree</p>
 </dd>
-<dt><a href="#_getTableReferences">_getTableReferences(node)</a> ⇒ <code>Set</code></dt>
-<dd><p>Traverse the From clause of the AST and return a Set containing the listed tables</p>
+<dt><a href="#_getColumnReferences">_getColumnReferences(node)</a> ⇒ <code>Set</code></dt>
+<dd><p>Traverse the Columns clause of the AST and return a Set containing the listed columns</p>
 </dd>
-<dt><a href="#_augmentWhere">_augmentWhere(node, tables)</a></dt>
+<dt><a href="#_augmentWhere">_augmentWhere(node, columns)</a></dt>
 <dd><p>Traverse and augment the Where clause of the AST, and check if conditions using a table reference
 are valid</p>
 </dd>
 <dt><a href="#_constructSelectors">_constructSelectors(node, selectors)</a></dt>
 <dd><p>Traverse the augmented Where clause and generate corresponding CSS selectors</p>
 </dd>
-<dt><a href="#_compileSelectors">_compileSelectors(selectors)</a> ⇒ <code>String</code></dt>
+<dt><a href="#_compileSelectors">_compileSelectors(selectors, scope)</a> ⇒ <code>String</code></dt>
 <dd><p>Reduce the selectors map into one DOMString</p>
 </dd>
 <dt><a href="#transpile">transpile(ast)</a> ⇒ <code>List.&lt;(String|function())&gt;</code></dt>
@@ -93,21 +93,21 @@ Parse a query into an Abstract Syntax Tree
 | --- | --- |
 | query | <code>String</code> | 
 
-<a name="_getTableReferences"></a>
+<a name="_getColumnReferences"></a>
 
-## \_getTableReferences(node) ⇒ <code>Set</code>
-Traverse the From clause of the AST and return a Set containing the listed tables
+## \_getColumnReferences(node) ⇒ <code>Set</code>
+Traverse the Columns clause of the AST and return a Set containing the listed columns
 
 **Kind**: global function  
-**Returns**: <code>Set</code> - Set containing the tables listed in the From clause  
+**Returns**: <code>Set</code> - Set containing the columns listed in the From clause  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| node | <code>Object</code> | The From clause of the AST |
+| node | <code>Object</code> | The Columns clause of the AST |
 
 <a name="_augmentWhere"></a>
 
-## \_augmentWhere(node, tables)
+## \_augmentWhere(node, columns)
 Traverse and augment the Where clause of the AST, and check if conditions using a table referenceare valid
 
 **Kind**: global function  
@@ -115,7 +115,7 @@ Traverse and augment the Where clause of the AST, and check if conditions using 
 | Param | Type | Description |
 | --- | --- | --- |
 | node | <code>Object</code> | The Where clause of the AST |
-| tables | <code>Set</code> | Set containing the tables listed in the From clause |
+| columns | <code>Set</code> | Set containing the columns listed in the From clause |
 
 <a name="_constructSelectors"></a>
 
@@ -127,19 +127,20 @@ Traverse the augmented Where clause and generate corresponding CSS selectors
 | Param | Type | Description |
 | --- | --- | --- |
 | node | <code>Object</code> | The augmented Where clause of the AST |
-| selectors | <code>Object</code> | Map of tables to their generated selectors |
+| selectors | <code>Object</code> | Map of columns to their generated selectors |
 
 <a name="_compileSelectors"></a>
 
-## \_compileSelectors(selectors) ⇒ <code>String</code>
+## \_compileSelectors(selectors, scope) ⇒ <code>String</code>
 Reduce the selectors map into one DOMString
 
 **Kind**: global function  
 **Returns**: <code>String</code> - compiled DOMString  
 
-| Param | Type |
-| --- | --- |
-| selectors | <code>Object</code> | 
+| Param | Type | Description |
+| --- | --- | --- |
+| selectors | <code>Object</code> |  |
+| scope | <code>String</code> | the upmost parent |
 
 <a name="transpile"></a>
 
