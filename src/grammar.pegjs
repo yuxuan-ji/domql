@@ -140,17 +140,7 @@ column_list_item
     }
 
 from_clause
-  = KW_FROM __ l:table_ref_list { return l; }
-
-table_ref_list
-  = head:table_name
-    tail:table_ref* {
-      tail.unshift(head);
-      return tail;
-    }
-
-table_ref
-  = __ COMMA __ t:table_name { return t; }
+  = KW_FROM __ l:table_name { return l; }
 
 table_name
   = dt:ident {
