@@ -138,7 +138,7 @@ function _compileSelectors(selectors, scope) {
  * Traverses the given Abstract Syntax Tree
  * and generates a set of directives
  * @param  {Object} ast
- * @return {List<String|Function>}
+ * @return {Array<String|Function>}
  */
 export function transpile(ast) {
 

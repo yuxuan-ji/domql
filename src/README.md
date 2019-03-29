@@ -25,7 +25,7 @@ are valid</p>
 <dt><a href="#_compileSelectors">_compileSelectors(selectors, scope)</a> ⇒ <code>String</code></dt>
 <dd><p>Reduce the selectors map into one DOMString</p>
 </dd>
-<dt><a href="#transpile">transpile(ast)</a> ⇒ <code>List.&lt;(String|function())&gt;</code></dt>
+<dt><a href="#transpile">transpile(ast)</a> ⇒ <code>Array.&lt;(String|function())&gt;</code></dt>
 <dd><p>Traverses the given Abstract Syntax Tree
 and generates a set of directives</p>
 </dd>
@@ -144,7 +144,7 @@ Reduce the selectors map into one DOMString
 
 <a name="transpile"></a>
 
-## transpile(ast) ⇒ <code>List.&lt;(String\|function())&gt;</code>
+## transpile(ast) ⇒ <code>Array.&lt;(String\|function())&gt;</code>
 Traverses the given Abstract Syntax Treeand generates a set of directives
 
 **Kind**: global function  
@@ -175,7 +175,7 @@ Reduces a list of directives by applyingeach element on its previous element an
 
 | Param | Type |
 | --- | --- |
-| directives | <code>Array.&lt;String&gt;</code> \| <code>Array.&lt;function()&gt;</code> | 
+| directives | <code>Array.&lt;(String\|function())&gt;</code> | 
 
 <a name="limiter"></a>
 

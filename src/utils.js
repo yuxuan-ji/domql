@@ -13,7 +13,7 @@ export function sort(f, arr) {
  * Reduces a list of directives by applying
  * each element on its previous element and
  * returns the final Element array or Element
- * @param  {String[]|Function[]} directives
+ * @param  {Array<String|Function>} directives
  * @return {Element[]|Element}
  */
 export function execute(directives) {
