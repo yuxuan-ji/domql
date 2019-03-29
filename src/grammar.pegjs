@@ -312,7 +312,7 @@ column_ref
   / col:column {
       return {
         type: 'column_ref',
-        field: f
+        column: col
       };
     }
 
