@@ -129,7 +129,7 @@ select_stmt
 //////////////////////////////////////////////// CLAUSES ////////////////////////////////////////////////
 
 column_clause
-  = (STAR !ident_start) { return '*'; }
+  = (STAR !ident_start) { return [{type:'column_ref', column:'*'}]; }
   / head:column_list_item tail:(__ COMMA __ column_list_item)* {
       return createList(head, tail);
     }
