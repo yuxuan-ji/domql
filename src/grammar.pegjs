@@ -390,10 +390,10 @@ literal_bool
     }
 
 literal_string
-  = ca:("'" single_char* "'") {
+  = ca:quoted_ident {
       return {
         type: 'string',
-        value: ca[1].join('')
+        value: ca
       };
     }
 
