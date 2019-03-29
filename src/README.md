@@ -32,10 +32,13 @@ and generates a set of directives</p>
 <dt><a href="#sort">sort(f, arr)</a> ⇒ <code>Array.&lt;Any&gt;</code></dt>
 <dd><p>Directive: Sort</p>
 </dd>
-<dt><a href="#execute">execute(directives)</a> ⇒ <code>NodeList</code> | <code>Element</code></dt>
+<dt><a href="#execute">execute(directives)</a> ⇒ <code>Array.&lt;Element&gt;</code> | <code>Element</code></dt>
 <dd><p>Reduces a list of directives by applying
 each element on its previous element and
-returns the final NodeList, Element, or null</p>
+returns the final Element array or Element</p>
+</dd>
+<dt><a href="#limiter">limiter(limit, arr)</a> ⇒ <code>Array.&lt;Any&gt;</code> | <code>Any</code></dt>
+<dd><p>Directive: Limiter</p>
 </dd>
 </dl>
 
@@ -49,7 +52,7 @@ Domql: Domql API
 * [Domql](#Domql)
     * [new exports.Domql(query)](#new_Domql_new)
     * [.compile(query)](#Domql+compile)
-    * [.execute()](#Domql+execute) ⇒ <code>NodeList</code> \| <code>Element</code>
+    * [.execute()](#Domql+execute) ⇒ <code>Array.&lt;Element&gt;</code> \| <code>Element</code>
 
 <a name="new_Domql_new"></a>
 
@@ -74,8 +77,8 @@ Compile user query into a set of directives
 
 <a name="Domql+execute"></a>
 
-### domql.execute() ⇒ <code>NodeList</code> \| <code>Element</code>
-Execute compiled set of directives andreturns a NodeList or an Element or null if not found
+### domql.execute() ⇒ <code>Array.&lt;Element&gt;</code> \| <code>Element</code>
+Execute compiled set of directives andreturns a Element array or an Element.
 
 **Kind**: instance method of [<code>Domql</code>](#Domql)  
 <a name="parse"></a>
@@ -164,12 +167,24 @@ Directive: Sort
 
 <a name="execute"></a>
 
-## execute(directives) ⇒ <code>NodeList</code> \| <code>Element</code>
-Reduces a list of directives by applyingeach element on its previous element andreturns the final NodeList, Element, or null
+## execute(directives) ⇒ <code>Array.&lt;Element&gt;</code> \| <code>Element</code>
+Reduces a list of directives by applyingeach element on its previous element andreturns the final Element array or Element
 
 **Kind**: global function  
 
 | Param | Type |
 | --- | --- |
 | directives | <code>Array.&lt;String&gt;</code> \| <code>Array.&lt;function()&gt;</code> | 
+
+<a name="limiter"></a>
+
+## limiter(limit, arr) ⇒ <code>Array.&lt;Any&gt;</code> \| <code>Any</code>
+Directive: Limiter
+
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| limit | <code>Number</code> | max amount of elements in the array |
+| arr | <code>Array.&lt;Any&gt;</code> |  |
 
