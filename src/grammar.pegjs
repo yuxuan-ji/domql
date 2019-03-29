@@ -312,17 +312,17 @@ primary
     }  
 
 column_ref
-  = tbl:ident __ DOT __ col:column {
+  = col:column __ DOT __ f:ident {
       return {
         type: 'column_ref',
-        table: tbl,
-        column: col
+        column: col,
+        field: f
       };
     }
   / col:column {
       return {
         type: 'column_ref',
-        column: col
+        field: f
       };
     }
 
@@ -332,8 +332,7 @@ column_list
     }
 
 ident
-  = (STAR !ident_start) { return '*' }
-  / name:ident_name !{ return isReserved[name.toUpperCase()] === true; } {
+  = name:ident_name !{ return isReserved[name.toUpperCase()] === true; } {
       return name;
     }
   / name:quoted_ident {
@@ -366,7 +365,7 @@ ident_name
 
 ident_start = [A-Za-z_]
 
-ident_part  = [A-Za-z0-9_\.]
+ident_part  = [A-Za-z0-9_]
 
 // to support column name like `cf1:name`, used to represent object properties e.g.: person.name -> person:name
 column_part  = [A-Za-z0-9_:]
