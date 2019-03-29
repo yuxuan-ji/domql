@@ -1,3 +1,4 @@
 src/pegjs_parser.js
 lib/
 docs/
+src/sizzle.js
