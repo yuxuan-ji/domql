@@ -1,3 +1,6 @@
+import * as sizzle from './sizzle.js';
+import {limiter} from './utils.js';
+
 /**
  * Traverse the From clause of the AST and return a Set containing the listed tables
  * @param  {Object} node The From clause of the AST
@@ -142,8 +145,8 @@ export function transpile(ast) {
 
   var directives = [compiled];
 
-  if (ast.limit && ast.limit.value === 1) directives.push(document.querySelector.bind(document));
-  else directives.push(document.querySelectorAll.bind(document));
+  directives.push(sizzle.default);
+  if (ast.limit) directives.push(limiter.bind(null, ast.limit.value));
 
   return directives;
 }

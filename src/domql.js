@@ -37,8 +37,8 @@ export class Domql {
 
   /**
    * Execute compiled set of directives and
-   * returns a NodeList or an Element or null if not found
-   * @return {NodeList|Element}
+   * returns a Element array or an Element.
+   * @return {Element[]|Element}
    */
   execute() {
     return utils.execute(this._directives);

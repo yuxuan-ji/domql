@@ -12,9 +12,9 @@ export function sort(f, arr) {
 /**
  * Reduces a list of directives by applying
  * each element on its previous element and
- * returns the final NodeList, Element, or null
+ * returns the final Element array or Element
  * @param  {String[]|Function[]} directives
- * @return {NodeList|Element}
+ * @return {Element[]|Element}
  */
 export function execute(directives) {
   if (!directives || directives.length === 0) return null;
@@ -23,4 +23,15 @@ export function execute(directives) {
     result = directives[i](result);
   }
   return result;
+}
+
+/**
+ * Directive: Limiter
+ * @param  {Number} limit max amount of elements in the array
+ * @param  {Any[]} arr
+ * @return {Any[]|Any}
+ */
+export function limiter(limit, arr) {
+  var out = arr.splice(0, limit);
+  return out.length === 1 ? out[0] : out;
 }
