@@ -140,10 +140,11 @@ column_list_item
     }
 
 from_clause
-  = KW_FROM __ l:table_name { return l; }
+  = KW_FROM __ l:table_ref { return l; }
 
-table_name
-  = dt:ident {
+table_ref
+  = (STAR !ident_start) { return [{type:'table_ref', table:'*'}]; }
+  / dt:ident {
       var obj = { type: 'table_ref', table: dt };
       return obj;
     }
