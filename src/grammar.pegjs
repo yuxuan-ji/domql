@@ -143,7 +143,7 @@ from_clause
   = KW_FROM __ l:table_ref { return l; }
 
 table_ref
-  = (STAR !ident_start) { return [{type:'table_ref', table:'*'}]; }
+  = (STAR !ident_start) { return {type:'table_ref', table:'*'}; }
   / dt:ident {
       var obj = { type: 'table_ref', table: dt };
       return obj;
