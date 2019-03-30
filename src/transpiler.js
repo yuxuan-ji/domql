@@ -119,13 +119,11 @@ function _constructSelectors(node, selectors) {
  * @return {String} compiled DOMString
  */
 function _compileSelectors(selectors, scope) {
-  scope = scope === "html" ? '' : scope + " ";
-
   var outp = [];
   for (var key in selectors) {
     var selector = "";
     for (var i = 0; i < selectors[key].length; i++) {
-      selector += scope + key + selectors[key][i];
+      selector += scope + " " + key + selectors[key][i];
       if (i < selectors[key].length - 1) selector += ", ";
     }
     outp.push(selector);
