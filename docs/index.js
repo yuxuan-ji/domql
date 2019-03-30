@@ -61,6 +61,9 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 // Function to output domql output
 function domqlsearch() {
+  var outp = document.querySelector('#domql-output');
+  outp.innerText = "";
+
   var out = "";
   var query = document.getElementById("domql-search").value;
   try {
@@ -78,10 +81,8 @@ function domqlsearch() {
     out = error.message;
   }
 
-  var outp = document.querySelector('#domql-output');
-
   var content = out ? html_beautify(out, {indent_size: 2}) : "null";
-  outp.innerText = content;  
-
+  outp.innerText = content;
   hljs.highlightBlock(outp);
+
 }
