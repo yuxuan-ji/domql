@@ -12,9 +12,8 @@ Yeah, me neither.
 ES6:
 
 ```javascript
-import Domql from './domql.min.js';
-var cursor = new Domql("SELECT * FROM html WHERE id='foo'");
-var result = cursor.execute();
+import * as domql from './domql.min.js';
+var result = domql.$("SELECT * FROM html WHERE id='foo'");
 ```
 
 From script:
@@ -23,9 +22,21 @@ From script:
 <script src="https://cdn.jsdelivr.net/gh/yuxuan-ji/domql@master/dist/domql.min.js"></script>
 
 <script>
-    var cursor = new domql.Domql("SELECT * FROM html WHERE id='foo'");
-    var result = cursor.execute();
+    var result = domql.$("SELECT * FROM html WHERE id='foo'");
 </script>
+```
+
+## Compiling a DOMQL query for subsequent usage
+
+You can use the <code>$$</code> helper method to avoid recompiling the same query:
+
+```javascript
+var cursor = domql.$$("SELECT * FROM html WHERE id='foo'");
+// You can use this cursor for subsequent queries:
+var result = cursor.execute();
+var result2 = cursor.execute();
+...
+var resultX = cursor.execute();
 ```
 
 ## Using a different query engine
