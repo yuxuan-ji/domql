@@ -146,7 +146,7 @@ Wrapper around the inner query engine. Defaults to QueryEngine.defaultQuerySelec
 
 * [QueryEngine](#QueryEngine)
     * [.getEngine()](#QueryEngine.getEngine) ⇒ <code>function</code>
-    * [.setEngine()](#QueryEngine.setEngine)
+    * [.setEngine(engine)](#QueryEngine.setEngine)
     * [.useDefault()](#QueryEngine.useDefault)
     * [.defaultQuerySelector(selector)](#QueryEngine.defaultQuerySelector) ⇒ <code>Array.&lt;Element&gt;</code>
 
@@ -158,10 +158,15 @@ Get the engine
 **Kind**: static method of [<code>QueryEngine</code>](#QueryEngine)  
 <a name="QueryEngine.setEngine"></a>
 
-### QueryEngine.setEngine()
-Set the engine
+### QueryEngine.setEngine(engine)
+Set the engine. The given engine can be any Javascript function that accepts aString as its first parameter and returns an Array of Elements.
 
 **Kind**: static method of [<code>QueryEngine</code>](#QueryEngine)  
+
+| Param | Type |
+| --- | --- |
+| engine | <code>function</code> | 
+
 <a name="QueryEngine.useDefault"></a>
 
 ### QueryEngine.useDefault()
@@ -171,7 +176,7 @@ Use the default engine: QueryEngine.defaultQuerySelector
 <a name="QueryEngine.defaultQuerySelector"></a>
 
 ### QueryEngine.defaultQuerySelector(selector) ⇒ <code>Array.&lt;Element&gt;</code>
-The default query selector: document.querySelectorAll wrapped around Array.from
+The default query selector: document.querySelectorAll wrapped by Array.from
 
 **Kind**: static method of [<code>QueryEngine</code>](#QueryEngine)  
 

@@ -12,7 +12,9 @@ export class QueryEngine {
   }
 
   /**
-   * Set the engine
+   * Set the engine. The given engine can be any Javascript function that accepts a
+   * String as its first parameter and returns an Array of Elements.
+   * @param {Function} engine
    */
   static setEngine(engine) {
     QueryEngine._querySelector = engine;
@@ -26,7 +28,7 @@ export class QueryEngine {
   }
 
   /**
-   * The default query selector: document.querySelectorAll wrapped around Array.from
+   * The default query selector: document.querySelectorAll wrapped by Array.from
    * @param  {String} selector
    * @return {Element[]}
    */
