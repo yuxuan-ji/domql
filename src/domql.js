@@ -1,9 +1,9 @@
-import {parse} from './parser.js';
-import {transpile} from './transpiler.js';
-import * as utils from './utils.js';
+import {Parser} from './parser.js';
+import {Transpiler} from './transpiler.js';
+import {Directives} from './directives.js';
 
 /**
- * Domql: Domql API
+ * The public Domql API
  */
 export class Domql {
 
@@ -31,8 +31,8 @@ export class Domql {
   compile(query = null) {
     this._query = query;
     if (!query) return;
-    var ast = parse(query);
-    this._directives = transpile(ast);
+    var ast = Parser.parse(query);
+    this._directives = Transpiler.transpile(ast);
   }
 
   /**
@@ -41,6 +41,6 @@ export class Domql {
    * @return {Element[]|Element}
    */
   execute() {
-    return utils.execute(this._directives);
+    return Directives.execute(this._directives);
   }
 }
