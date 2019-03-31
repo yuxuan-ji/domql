@@ -15,6 +15,7 @@ export class Domql {
    */
   constructor(query = null) {
     this._name = 'Domql';
+    this._queryModel = {};
     this.compile(query);
   }
 

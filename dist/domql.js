@@ -233,6 +233,7 @@ function () {
     _classCallCheck(this, Domql);
 
     this._name = 'Domql';
+    this._queryModel = {};
     this.compile(query);
   }
 
