@@ -7,7 +7,11 @@
         <title>domql playground</title>
     </head>
     <body>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sizzle/2.3.3/sizzle.min.js"></script>
         <script src="../lib/domql.js"></script>
+        <script>
+            domql.QueryEngine.setEngine(Sizzle);
+        </script>
 
         <div id="1" class="a-div">
             <b> domql playground </b>

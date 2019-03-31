@@ -27,6 +27,31 @@ From script:
     var result = cursor.execute();
 </script>
 ```
+
+## Using a different query engine
+
+By default, Domql uses <code>document.querySelectorAll</code> as its query engine. While this results in an overall smaller
+build file, the default engine has limited support for complex CSS selectors. When you need access to complex queries, it is
+recommended to use an external query engine such as Sizzle.js like so:
+
+ES6:
+
+```javascript
+import * as Sizzle from './sizzle.min.js';
+...
+domql.QueryEngine.setEngine(Sizzle.default);
+```
+
+From script:
+
+```html
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sizzle/2.3.3/sizzle.min.js"></script>
+...
+<script>
+    domql.QueryEngine.setEngine(Sizzle);
+</script>
+```
+
 ## Demo
 
 _A demo is available in the [Demo Page][demo]._
