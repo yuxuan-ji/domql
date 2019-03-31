@@ -66,8 +66,7 @@ function domqlsearch() {
 
   var query = document.getElementById("domql-search").value;
   try {
-    var cursor = new domql.Domql(query);
-    var result = cursor.execute();
+    var result = domql.$(query);
 
     var out = "Found " + result.length + " result(s).\n";
     result.forEach(function(node) {
