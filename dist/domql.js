@@ -297,7 +297,7 @@ function $(query) {
  * Utility method to create a DOMQL instance. This instance can then be used
  * subsequently to avoid recompilation.
  * @param  {String} query
- * @return {Object} DOMQL instance
+ * @return {Domql} DOMQL instance
  */
 
 
@@ -4888,7 +4888,9 @@ function () {
       return QueryEngine._querySelector;
     }
     /**
-     * Set the engine
+     * Set the engine. The given engine can be any Javascript function that accepts a
+     * String as its first parameter and returns an Array of Elements.
+     * @param {Function} engine
      */
 
   }, {
@@ -4906,7 +4908,7 @@ function () {
       QueryEngine._querySelector = QueryEngine.defaultQuerySelector;
     }
     /**
-     * The default query selector: document.querySelectorAll wrapped around Array.from
+     * The default query selector: document.querySelectorAll wrapped by Array.from
      * @param  {String} selector
      * @return {Element[]}
      */

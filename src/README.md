@@ -24,7 +24,7 @@
 <dt><a href="#$">$(query)</a> ⇒ <code>Element</code></dt>
 <dd><p>Utilty method to execute a DOMQL query</p>
 </dd>
-<dt><a href="#$$">$$(query)</a> ⇒ <code>Object</code></dt>
+<dt><a href="#$$">$$(query)</a> ⇒ <code><a href="#Domql">Domql</a></code></dt>
 <dd><p>Utility method to create a DOMQL instance. This instance can then be used
 subsequently to avoid recompilation.</p>
 </dd>
@@ -273,11 +273,11 @@ Utilty method to execute a DOMQL query
 
 <a name="$$"></a>
 
-## $$(query) ⇒ <code>Object</code>
+## $$(query) ⇒ [<code>Domql</code>](#Domql)
 Utility method to create a DOMQL instance. This instance can then be usedsubsequently to avoid recompilation.
 
 **Kind**: global function  
-**Returns**: <code>Object</code> - DOMQL instance  
+**Returns**: [<code>Domql</code>](#Domql) - DOMQL instance  
 
 | Param | Type |
 | --- | --- |

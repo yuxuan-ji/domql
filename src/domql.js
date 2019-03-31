@@ -62,7 +62,7 @@ export function $(query) {
  * Utility method to create a DOMQL instance. This instance can then be used
  * subsequently to avoid recompilation.
  * @param  {String} query
- * @return {Object} DOMQL instance
+ * @return {Domql} DOMQL instance
  */
 export function $$(query) {
   return new Domql(query);
