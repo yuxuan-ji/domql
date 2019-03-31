@@ -32,7 +32,7 @@ From script:
 
 By default, Domql uses <code>document.querySelectorAll</code> as its query engine. While this results in an overall smaller
 build file, the default engine has limited support for complex CSS selectors. When you need access to complex queries, it is
-recommended to use an external query engine such as Sizzle.js like so:
+recommended to use an external query engine such as [Sizzle.js](https://github.com/jquery/sizzle) like so:
 
 ES6:
 
