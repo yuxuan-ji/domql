@@ -1,4 +1,4 @@
-import * as sizzle from './sizzle.js';
+import {QueryEngine} from './query_engine.js';
 import {Directives} from './directives.js';
 
 /**
@@ -161,7 +161,7 @@ export class Transpiler {
 
     var directives = [compiled];
 
-    directives.push(sizzle.default);
+    directives.push(QueryEngine.getEngine());
     if (ast.limit) directives.push(Directives.limiter.bind(null, ast.limit.value));
 
     return directives;
