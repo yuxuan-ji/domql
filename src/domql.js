@@ -39,8 +39,8 @@ export class Domql {
 
   /**
    * Execute compiled query model and
-   * returns a Element array or an Element.
-   * @return {Element[]|Element}
+   * returns an Element array.
+   * @return {Element[]}
    */
   execute() {
     return Directives.execute(this._queryModel.selector, this._queryModel.engine, this._queryModel.directives);

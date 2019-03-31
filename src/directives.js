@@ -17,11 +17,10 @@ export class Directives {
    * Directive: Limiter
    * @param  {Number} limit max amount of elements in the array
    * @param  {Any[]} arr
-   * @return {Any[]|Any}
+   * @return {Any[]}
    */
   static limiter(limit, arr) {
-    var out = arr.splice(0, limit);
-    return out.length === 1 ? out[0] : out;
+    return arr.slice(0, limit);
   }
 
   /**

@@ -144,14 +144,13 @@ function () {
      * Directive: Limiter
      * @param  {Number} limit max amount of elements in the array
      * @param  {Any[]} arr
-     * @return {Any[]|Any}
+     * @return {Any[]}
      */
 
   }, {
     key: "limiter",
     value: function limiter(limit, arr) {
-      var out = arr.splice(0, limit);
-      return out.length === 1 ? out[0] : out;
+      return arr.slice(0, limit);
     }
     /**
      * Query the CSS selector using the given engine, then apply each
@@ -255,8 +254,8 @@ function () {
     }
     /**
      * Execute compiled query model and
-     * returns a Element array or an Element.
-     * @return {Element[]|Element}
+     * returns an Element array.
+     * @return {Element[]}
      */
 
   }, {

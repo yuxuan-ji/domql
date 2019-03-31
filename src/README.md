@@ -27,7 +27,7 @@ Utility class containing directives for SQL modifiers
 
 * [Directives](#Directives)
     * [.sort(f, arr)](#Directives.sort) ⇒ <code>Array.&lt;Any&gt;</code>
-    * [.limiter(limit, arr)](#Directives.limiter) ⇒ <code>Array.&lt;Any&gt;</code> \| <code>Any</code>
+    * [.limiter(limit, arr)](#Directives.limiter) ⇒ <code>Array.&lt;Any&gt;</code>
     * [.execute(selector, engine, directives)](#Directives.execute) ⇒ <code>Array.&lt;Element&gt;</code>
 
 <a name="Directives.sort"></a>
@@ -45,7 +45,7 @@ Directive: Sort
 
 <a name="Directives.limiter"></a>
 
-### Directives.limiter(limit, arr) ⇒ <code>Array.&lt;Any&gt;</code> \| <code>Any</code>
+### Directives.limiter(limit, arr) ⇒ <code>Array.&lt;Any&gt;</code>
 Directive: Limiter
 
 **Kind**: static method of [<code>Directives</code>](#Directives)  
@@ -78,7 +78,7 @@ The public Domql API
 * [Domql](#Domql)
     * [new exports.Domql(query)](#new_Domql_new)
     * [.compile(query)](#Domql+compile)
-    * [.execute()](#Domql+execute) ⇒ <code>Array.&lt;Element&gt;</code> \| <code>Element</code>
+    * [.execute()](#Domql+execute) ⇒ <code>Array.&lt;Element&gt;</code>
 
 <a name="new_Domql_new"></a>
 
@@ -103,8 +103,8 @@ Compile user query into a query model
 
 <a name="Domql+execute"></a>
 
-### domql.execute() ⇒ <code>Array.&lt;Element&gt;</code> \| <code>Element</code>
-Execute compiled query model andreturns a Element array or an Element.
+### domql.execute() ⇒ <code>Array.&lt;Element&gt;</code>
+Execute compiled query model andreturns an Element array.
 
 **Kind**: instance method of [<code>Domql</code>](#Domql)  
 <a name="Parser"></a>
