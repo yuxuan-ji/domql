@@ -64,24 +64,21 @@ function domqlsearch() {
   var outp = document.querySelector('#domql-output');
   outp.innerText = "";
 
-  var out = "";
   var query = document.getElementById("domql-search").value;
   try {
     var cursor = new domql.Domql(query);
     var result = cursor.execute();
 
-    if (result instanceof Array) {
-        result.forEach(function(node) {
-            out += node.outerHTML + '\n';
-        });
-    } else {
-        out = result ? result.outerHTML : null;
-    }
+    var out = "Found " + result.length + " result(s).\n";
+    result.forEach(function(node) {
+        out += node.outerHTML + '\n';
+    });
+
   } catch (error) {
     out = error.message;
   }
 
-  var content = out ? html_beautify(out, {indent_size: 2}) : "null";
+  var content = html_beautify(out, {indent_size: 2});
   outp.innerText = content;
   hljs.highlightBlock(outp);
 
