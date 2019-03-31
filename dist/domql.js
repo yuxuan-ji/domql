@@ -4889,7 +4889,7 @@ function () {
     }
     /**
      * Set the engine. The given engine can be any Javascript function that accepts a
-     * String as its first parameter and returns an Array of Elements.
+     * CSS selector String as its first parameter and returns an Array of Elements.
      * @param {Function} engine
      */
 

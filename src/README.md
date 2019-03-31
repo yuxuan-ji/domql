@@ -159,7 +159,7 @@ Get the engine
 <a name="QueryEngine.setEngine"></a>
 
 ### QueryEngine.setEngine(engine)
-Set the engine. The given engine can be any Javascript function that accepts aString as its first parameter and returns an Array of Elements.
+Set the engine. The given engine can be any Javascript function that accepts aCSS selector String as its first parameter and returns an Array of Elements.
 
 **Kind**: static method of [<code>QueryEngine</code>](#QueryEngine)  
 
