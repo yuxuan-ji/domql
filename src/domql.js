@@ -2,6 +2,8 @@ import {Parser} from './parser.js';
 import {Transpiler} from './transpiler.js';
 import {Directives} from './directives.js';
 
+export {QueryEngine} from './query_engine.js';
+
 /**
  * The public Domql API
  */
