@@ -32,7 +32,7 @@ You can use the <code>$$</code> helper method to avoid recompiling the same quer
 
 ```javascript
 var cursor = domql.$$("SELECT * FROM html WHERE id='foo'");
-// You can use this cursor for subsequent queries:
+// You can then use this cursor for subsequent queries:
 var result = cursor.execute();
 var result2 = cursor.execute();
 ...
@@ -120,5 +120,5 @@ npm run build:docs
 to generate the documentation automatically from your JsDoc comments.
 
 <!-- Markdown link & img dfn's -->
-[examples]: https://yuxuan-ji.github.io/domql/#examples
+[examples]: https://github.com/yuxuan-ji/domql/examples
 [demo]: https://yuxuan-ji.github.io/domql/#demo

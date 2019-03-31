@@ -74,15 +74,12 @@
         Yeah, me neither.<br/>
         <br/>
         To use the library, simply use one the following methods to import the library.<br/>
-        To compile a query, use the <b>domql.Domql</b> constructor<br/>
-        To run a compiled query, use the <b>.execute()</b> method.<br/>
         <br/>
         ES6:
 
         <pre><code>
-        import Domql from './domql.min.js';
-        var cursor = new Domql("SELECT * FROM html WHERE id='foo'");
-        var result = cursor.execute();
+        import * as domql from './domql.min.js';
+        var result = domql.$("SELECT * FROM html WHERE id='foo'");
         </code></pre>
 
         From script:
@@ -91,8 +88,7 @@
         &lt;script src="https://cdn.jsdelivr.net/gh/yuxuan-ji/domql@master/dist/domql.min.js"&gt;&lt;/script&gt;
 
         &lt;script&gt;
-            var cursor = new domql.Domql("SELECT * FROM html WHERE id='foo'");
-            var result = cursor.execute();
+            var result = domql.$("SELECT * FROM html WHERE id='foo'");
         &lt;/script&gt;
         </code></pre>
 
@@ -125,7 +121,7 @@
       <div class="w3-container">
         <h1 class="w3-text-teal">Examples</h1>
         <p>
-            Coming soon...
+            Check out the <a href="https://github.com/yuxuan-ji/domql/examples">Examples Page</a>.
         </p>
       </div>
     </div>
