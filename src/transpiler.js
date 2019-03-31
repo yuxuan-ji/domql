@@ -139,9 +139,9 @@ export class Transpiler {
 
   /**
    * Traverses the given Abstract Syntax Tree
-   * and generates a set of directives
+   * and returns the query model
    * @param  {Object} ast
-   * @return {Array<String|Function>}
+   * @return {Object} the transpiled query model
    */
   static transpile(ast) {
 
@@ -159,12 +159,14 @@ export class Transpiler {
 
     var compiled = Transpiler._compileSelectors(selectors, scope);
 
-    var directives = [compiled];
-
-    directives.push(QueryEngine.getEngine());
+    var directives = [];
     if (ast.limit) directives.push(Directives.limiter.bind(null, ast.limit.value));
 
-    return directives;
+    return {
+      selector: compiled,
+      engine: QueryEngine.getEngine(),
+      directives: directives
+    };
   }
 
 }

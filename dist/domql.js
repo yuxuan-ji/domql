@@ -154,20 +154,21 @@ function () {
       return out.length === 1 ? out[0] : out;
     }
     /**
-     * Reduces a list of directives by applying
-     * each element on its previous element and
-     * returns the final Element array or Element
-     * @param  {Array<String|Function>} directives
-     * @return {Element[]|Element}
+     * Query the CSS selector using the given engine, then apply each
+     * directive on the result
+     * @param  {String} selector
+     * @param  {Function} engine
+     * @param  {Function[]} directives
+     * @return {Element[]}
      */
 
   }, {
     key: "execute",
-    value: function execute(directives) {
-      if (!directives || directives.length === 0) return null;
-      var result = directives[0];
+    value: function execute(selector, engine, directives) {
+      if (!selector) return [];
+      var result = engine(selector);
 
-      for (var i = 1; i < directives.length; i++) {
+      for (var i = 0; i < directives.length; i++) {
         result = directives[i](result);
       }
 
@@ -240,7 +241,7 @@ function () {
     key: "compile",
 
     /**
-     * Compile user query into a set of directives
+     * Compile user query into a query model
      * @param  {String} query
      */
     value: function compile() {
@@ -250,10 +251,10 @@ function () {
 
       var ast = _parser.Parser.parse(query);
 
-      this._directives = _transpiler.Transpiler.transpile(ast);
+      this._queryModel = _transpiler.Transpiler.transpile(ast);
     }
     /**
-     * Execute compiled set of directives and
+     * Execute compiled query model and
      * returns a Element array or an Element.
      * @return {Element[]|Element}
      */
@@ -261,7 +262,7 @@ function () {
   }, {
     key: "execute",
     value: function execute() {
-      return _directives.Directives.execute(this._directives);
+      return _directives.Directives.execute(this._queryModel.selector, this._queryModel.engine, this._queryModel.directives);
     }
   }, {
     key: "name",
@@ -5082,9 +5083,9 @@ function () {
     }
     /**
      * Traverses the given Abstract Syntax Tree
-     * and generates a set of directives
+     * and returns the query model
      * @param  {Object} ast
-     * @return {Array<String|Function>}
+     * @return {Object} the transpiled query model
      */
 
   }, {
@@ -5105,10 +5106,13 @@ function () {
 
       var compiled = Transpiler._compileSelectors(selectors, scope);
 
-      var directives = [compiled];
-      directives.push(_query_engine.QueryEngine.getEngine());
+      var directives = [];
       if (ast.limit) directives.push(_directives.Directives.limiter.bind(null, ast.limit.value));
-      return directives;
+      return {
+        selector: compiled,
+        engine: _query_engine.QueryEngine.getEngine(),
+        directives: directives
+      };
     }
   }]);
 

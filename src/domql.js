@@ -27,22 +27,22 @@ export class Domql {
   }
 
   /**
-   * Compile user query into a set of directives
+   * Compile user query into a query model
    * @param  {String} query
    */
   compile(query = null) {
     this._query = query;
     if (!query) return;
     var ast = Parser.parse(query);
-    this._directives = Transpiler.transpile(ast);
+    this._queryModel = Transpiler.transpile(ast);
   }
 
   /**
-   * Execute compiled set of directives and
+   * Execute compiled query model and
    * returns a Element array or an Element.
    * @return {Element[]|Element}
    */
   execute() {
-    return Directives.execute(this._directives);
+    return Directives.execute(this._queryModel.selector, this._queryModel.engine, this._queryModel.directives);
   }
 }

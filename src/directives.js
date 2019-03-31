@@ -25,16 +25,17 @@ export class Directives {
   }
 
   /**
-   * Reduces a list of directives by applying
-   * each element on its previous element and
-   * returns the final Element array or Element
-   * @param  {Array<String|Function>} directives
-   * @return {Element[]|Element}
+   * Query the CSS selector using the given engine, then apply each
+   * directive on the result
+   * @param  {String} selector
+   * @param  {Function} engine
+   * @param  {Function[]} directives
+   * @return {Element[]}
    */
-  static execute(directives) {
-    if (!directives || directives.length === 0) return null;
-    var result = directives[0];
-    for (var i = 1; i < directives.length; i++) {
+  static execute(selector, engine, directives) {
+    if (!selector) return [];
+    var result = engine(selector);
+    for (var i = 0; i < directives.length; i++) {
       result = directives[i](result);
     }
     return result;

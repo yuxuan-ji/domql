@@ -28,7 +28,7 @@ Utility class containing directives for SQL modifiers
 * [Directives](#Directives)
     * [.sort(f, arr)](#Directives.sort) ⇒ <code>Array.&lt;Any&gt;</code>
     * [.limiter(limit, arr)](#Directives.limiter) ⇒ <code>Array.&lt;Any&gt;</code> \| <code>Any</code>
-    * [.execute(directives)](#Directives.execute) ⇒ <code>Array.&lt;Element&gt;</code> \| <code>Element</code>
+    * [.execute(selector, engine, directives)](#Directives.execute) ⇒ <code>Array.&lt;Element&gt;</code>
 
 <a name="Directives.sort"></a>
 
@@ -57,14 +57,16 @@ Directive: Limiter
 
 <a name="Directives.execute"></a>
 
-### Directives.execute(directives) ⇒ <code>Array.&lt;Element&gt;</code> \| <code>Element</code>
-Reduces a list of directives by applyingeach element on its previous element andreturns the final Element array or Element
+### Directives.execute(selector, engine, directives) ⇒ <code>Array.&lt;Element&gt;</code>
+Query the CSS selector using the given engine, then apply eachdirective on the result
 
 **Kind**: static method of [<code>Directives</code>](#Directives)  
 
 | Param | Type |
 | --- | --- |
-| directives | <code>Array.&lt;(String\|function())&gt;</code> | 
+| selector | <code>String</code> | 
+| engine | <code>function</code> | 
+| directives | <code>Array.&lt;function()&gt;</code> | 
 
 <a name="Domql"></a>
 
@@ -91,7 +93,7 @@ Initialize a Domql object with the input query.
 <a name="Domql+compile"></a>
 
 ### domql.compile(query)
-Compile user query into a set of directives
+Compile user query into a query model
 
 **Kind**: instance method of [<code>Domql</code>](#Domql)  
 
@@ -102,7 +104,7 @@ Compile user query into a set of directives
 <a name="Domql+execute"></a>
 
 ### domql.execute() ⇒ <code>Array.&lt;Element&gt;</code> \| <code>Element</code>
-Execute compiled set of directives andreturns a Element array or an Element.
+Execute compiled query model andreturns a Element array or an Element.
 
 **Kind**: instance method of [<code>Domql</code>](#Domql)  
 <a name="Parser"></a>
@@ -177,7 +179,7 @@ Transpiler for converting Abstract Syntax Trees into CSS selectors and Javascrip
     * [._augmentWhere(node, columns)](#Transpiler._augmentWhere)
     * [._constructSelectors(node, selectors)](#Transpiler._constructSelectors)
     * [._compileSelectors(selectors, scope)](#Transpiler._compileSelectors) ⇒ <code>String</code>
-    * [.transpile(ast)](#Transpiler.transpile) ⇒ <code>Array.&lt;(String\|function())&gt;</code>
+    * [.transpile(ast)](#Transpiler.transpile) ⇒ <code>Object</code>
 
 <a name="Transpiler._getColumnReferences"></a>
 
@@ -230,10 +232,11 @@ Reduce the selectors map into one DOMString
 
 <a name="Transpiler.transpile"></a>
 
-### Transpiler.transpile(ast) ⇒ <code>Array.&lt;(String\|function())&gt;</code>
-Traverses the given Abstract Syntax Treeand generates a set of directives
+### Transpiler.transpile(ast) ⇒ <code>Object</code>
+Traverses the given Abstract Syntax Treeand returns the query model
 
 **Kind**: static method of [<code>Transpiler</code>](#Transpiler)  
+**Returns**: <code>Object</code> - the transpiled query model  
 
 | Param | Type |
 | --- | --- |
