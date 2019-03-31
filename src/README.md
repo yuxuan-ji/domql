@@ -10,6 +10,9 @@
 <dt><a href="#Parser">Parser</a></dt>
 <dd><p>Parser for converting queries into Abstract Syntax trees</p>
 </dd>
+<dt><a href="#QueryEngine">QueryEngine</a></dt>
+<dd><p>Wrapper around the inner query engine. Defaults to QueryEngine.defaultQuerySelector</p>
+</dd>
 <dt><a href="#Transpiler">Transpiler</a></dt>
 <dd><p>Transpiler for converting Abstract Syntax Trees into CSS selectors and Javascript directives</p>
 </dd>
@@ -119,6 +122,48 @@ Parse a query into an Abstract Syntax Tree
 | Param | Type |
 | --- | --- |
 | query | <code>String</code> | 
+
+<a name="QueryEngine"></a>
+
+## QueryEngine
+Wrapper around the inner query engine. Defaults to QueryEngine.defaultQuerySelector
+
+**Kind**: global class  
+
+* [QueryEngine](#QueryEngine)
+    * [.getEngine()](#QueryEngine.getEngine) ⇒ <code>function</code>
+    * [.setEngine()](#QueryEngine.setEngine)
+    * [.useDefault()](#QueryEngine.useDefault)
+    * [.defaultQuerySelector(selector)](#QueryEngine.defaultQuerySelector) ⇒ <code>Array.&lt;Element&gt;</code>
+
+<a name="QueryEngine.getEngine"></a>
+
+### QueryEngine.getEngine() ⇒ <code>function</code>
+Get the engine
+
+**Kind**: static method of [<code>QueryEngine</code>](#QueryEngine)  
+<a name="QueryEngine.setEngine"></a>
+
+### QueryEngine.setEngine()
+Set the engine
+
+**Kind**: static method of [<code>QueryEngine</code>](#QueryEngine)  
+<a name="QueryEngine.useDefault"></a>
+
+### QueryEngine.useDefault()
+Use the default engine: QueryEngine.defaultQuerySelector
+
+**Kind**: static method of [<code>QueryEngine</code>](#QueryEngine)  
+<a name="QueryEngine.defaultQuerySelector"></a>
+
+### QueryEngine.defaultQuerySelector(selector) ⇒ <code>Array.&lt;Element&gt;</code>
+The default query selector: document.querySelectorAll wrapped around Array.from
+
+**Kind**: static method of [<code>QueryEngine</code>](#QueryEngine)  
+
+| Param | Type |
+| --- | --- |
+| selector | <code>String</code> | 
 
 <a name="Transpiler"></a>
 
