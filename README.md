@@ -120,5 +120,5 @@ npm run build:docs
 to generate the documentation automatically from your JsDoc comments.
 
 <!-- Markdown link & img dfn's -->
-[examples]: https://github.com/yuxuan-ji/domql/examples
+[examples]: https://github.com/yuxuan-ji/domql/tree/master/examples
 [demo]: https://yuxuan-ji.github.io/domql/#demo
