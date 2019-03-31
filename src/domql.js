@@ -5,7 +5,7 @@ import {Directives} from './directives.js';
 export {QueryEngine} from './query_engine.js';
 
 /**
- * The public Domql API
+ * DOMQL API model
  */
 export class Domql {
 
@@ -46,4 +46,24 @@ export class Domql {
   execute() {
     return Directives.execute(this._queryModel.selector, this._queryModel.engine, this._queryModel.directives);
   }
+}
+
+/**
+ * Utilty method to execute a DOMQL query
+ * @param  {String} query
+ * @return {Element} query result
+ */
+export function $(query) {
+  var cursor = new Domql(query);
+  return cursor.execute();
+}
+
+/**
+ * Utility method to create a DOMQL instance. This instance can then be used
+ * subsequently to avoid recompilation.
+ * @param  {String} query
+ * @return {Object} DOMQL instance
+ */
+export function $$(query) {
+  return new Domql(query);
 }

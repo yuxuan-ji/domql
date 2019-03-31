@@ -195,6 +195,8 @@ exports.Directives = Directives;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.$ = $;
+exports.$$ = $$;
 Object.defineProperty(exports, "QueryEngine", {
   enumerable: true,
   get: function get() {
@@ -218,7 +220,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 /**
- * The public Domql API
+ * DOMQL API model
  */
 var Domql =
 /*#__PURE__*/
@@ -278,8 +280,30 @@ function () {
 
   return Domql;
 }();
+/**
+ * Utilty method to execute a DOMQL query
+ * @param  {String} query
+ * @return {Element} query result
+ */
+
 
 exports.Domql = Domql;
+
+function $(query) {
+  var cursor = new Domql(query);
+  return cursor.execute();
+}
+/**
+ * Utility method to create a DOMQL instance. This instance can then be used
+ * subsequently to avoid recompilation.
+ * @param  {String} query
+ * @return {Object} DOMQL instance
+ */
+
+
+function $$(query) {
+  return new Domql(query);
+}
 
 /***/ }),
 

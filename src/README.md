@@ -5,7 +5,7 @@
 <dd><p>Utility class containing directives for SQL modifiers</p>
 </dd>
 <dt><a href="#Domql">Domql</a></dt>
-<dd><p>The public Domql API</p>
+<dd><p>DOMQL API model</p>
 </dd>
 <dt><a href="#Parser">Parser</a></dt>
 <dd><p>Parser for converting queries into Abstract Syntax trees</p>
@@ -15,6 +15,18 @@
 </dd>
 <dt><a href="#Transpiler">Transpiler</a></dt>
 <dd><p>Transpiler for converting Abstract Syntax Trees into CSS selectors and Javascript directives</p>
+</dd>
+</dl>
+
+## Functions
+
+<dl>
+<dt><a href="#$">$(query)</a> ⇒ <code>Element</code></dt>
+<dd><p>Utilty method to execute a DOMQL query</p>
+</dd>
+<dt><a href="#$$">$$(query)</a> ⇒ <code>Object</code></dt>
+<dd><p>Utility method to create a DOMQL instance. This instance can then be used
+subsequently to avoid recompilation.</p>
 </dd>
 </dl>
 
@@ -71,7 +83,7 @@ Query the CSS selector using the given engine, then apply eachdirective on the 
 <a name="Domql"></a>
 
 ## Domql
-The public Domql API
+DOMQL API model
 
 **Kind**: global class  
 
@@ -241,4 +253,28 @@ Traverses the given Abstract Syntax Treeand returns the query model
 | Param | Type |
 | --- | --- |
 | ast | <code>Object</code> | 
+
+<a name="$"></a>
+
+## $(query) ⇒ <code>Element</code>
+Utilty method to execute a DOMQL query
+
+**Kind**: global function  
+**Returns**: <code>Element</code> - query result  
+
+| Param | Type |
+| --- | --- |
+| query | <code>String</code> | 
+
+<a name="$$"></a>
+
+## $$(query) ⇒ <code>Object</code>
+Utility method to create a DOMQL instance. This instance can then be usedsubsequently to avoid recompilation.
+
+**Kind**: global function  
+**Returns**: <code>Object</code> - DOMQL instance  
+
+| Param | Type |
+| --- | --- |
+| query | <code>String</code> | 
 
