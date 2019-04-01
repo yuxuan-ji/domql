@@ -1,4 +1,4 @@
-![Logo](https://github.com/yuxuan-ji/domql/blob/master/logo.jpg)
+![Logo](https://github.com/yuxuan-ji/domql/blob/master/logo.png)
 ======
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/435de61743134f549100edd8b737a198)](https://www.codacy.com/app/yuxuan98/domql?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=yuxuan-ji/domql&amp;utm_campaign=Badge_Grade)
