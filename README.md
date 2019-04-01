@@ -1,36 +1,9 @@
-# domql
+# domql-manual
 > DOM query language.
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/435de61743134f549100edd8b737a198)](https://www.codacy.com/app/yuxuan98/domql?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=yuxuan-ji/domql&amp;utm_campaign=Badge_Grade)
-[![Known Vulnerabilities](https://snyk.io/test/github/yuxuan-ji/domql/badge.svg?targetFile=package.json)](https://snyk.io/test/github/yuxuan-ji/domql?targetFile=package.json)
+## The manual branch
 
-Tired of using document.querySelector() with CSS selectors? Ever wanted to use SQL-like syntax to query DOM elements?<br/>
-Yeah, me neither.
-
-## Installation & Usage
-
-ES6:
-
-```javascript
-import Domql from './domql.min.js';
-var cursor = new Domql("SELECT * FROM html WHERE id='foo'");
-var result = cursor.execute();
-```
-
-From script:
-
-```html
-<script src="domql.min.js"></script>
-
-<script>
-    var cursor = new domql.Domql("SELECT * FROM html WHERE id='foo'");
-    var result = cursor.execute();
-</script>
-```
-
-## More examples
-
-_For even more examples and usage, please refer to the [Wiki][wiki]._
+This branch is an in development manual creation of a lexer + parser, without relying on PEG.js.
 
 ## Development setup
 
