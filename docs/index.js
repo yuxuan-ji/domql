@@ -67,10 +67,10 @@ function domqlsearch() {
   var query = document.getElementById("domql-search").value;
   try {
     var result = domql.$(query);
-
-    var out = "Found " + result.length + " result(s).\n";
+    var sep = "\n-------------------------------------------------------------------------\n";
+    var out = "Found " + result.length + " result(s)." + sep;
     result.forEach(function(node) {
-        out += node.outerHTML + '\n';
+        out += node.outerHTML + sep;
     });
 
   } catch (error) {
