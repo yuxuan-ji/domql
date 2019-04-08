@@ -30,6 +30,21 @@ From script:
 </script>
 ```
 
+## Query Syntax
+
+When writing queries, use the following DOMQL query syntax:
+```sql
+SELECT [HTMLTag,...|*] FROM [HTMLTag|*] (WHERE [HTMLTag].[attribute='value'] (, AND|OR ...)) (LIMIT value)
+```
+
+## Demo
+
+_A demo is available in the [Demo Page][demo]._
+
+## More examples
+
+_For even more examples and usage, please refer to the [Examples Page][examples]._
+
 ## Compiling a DOMQL query for subsequent usage
 
 You can use the <code>$$</code> helper method to avoid recompiling the same query:
@@ -42,39 +57,6 @@ var result2 = cursor.execute();
 ...
 var resultX = cursor.execute();
 ```
-
-## Basic Usage
-
-When writing queries, use the following DOMQL query syntax:
-```sql
-SELECT [HTMLTag,...|*] FROM [HTMLTag|*] (WHERE [HTMLTag].[attribute='value'] (, AND|OR ...))
-```
-
-### Select all elements
-```javascript
-var result = domql.$("SELECT * FROM *");
-```
-
-### Select the <code>html</code> element
-```javascript
-var result = domql.$("SELECT html FROM *");
-```
-
-### Select all elements inside the <code>html</code> element
-```javascript
-var result = domql.$("SELECT * FROM html");
-```
-
-### Select all <code>p</code> and <code>a</code> elements inside <code>div</code> elements
-```javascript
-var result = domql.$("SELECT p, a FROM div");
-```
-
-### Select all <code>p</code> and <code>a</code> elements inside <code>div</code> elements with conditions
-```javascript
-var result = domql.$("SELECT p, a FROM div WHERE p.id='foo' AND (a.id='bar' OR a.href='baz.com')");
-```
-
 
 ## Using a different query engine
 
@@ -100,13 +82,6 @@ From script:
 </script>
 ```
 
-## Demo
-
-_A demo is available in the [Demo Page][demo]._
-
-## More examples
-
-_For even more examples and usage, please refer to the [Examples Page][examples]._
 
 ## Development setup
 
@@ -116,16 +91,16 @@ Install Dependencies:
 npm install
 ```
 
-Build lib:
+Build dist:
 
 ```sh
 npm run build
 ```
 
-Build non-minified and run playground:
+Build JSDoc to markdown documentation:
 
 ```sh
-npm run dev
+npm run build:docs
 ```
 
 Run tests:
@@ -147,14 +122,6 @@ Please make sure to update tests as appropriate.
 4. Push to the branch (`git push origin feature/fooBar`)
 5. Create a new Pull Request
 
-## Documentation
-
-Documentation is generated with JsDoc and jsdoc2md. Run:
-
-```sh
-npm run build:docs
-```
-to generate the documentation automatically from your JsDoc comments.
 
 <!-- Markdown link & img dfn's -->
 [examples]: https://github.com/yuxuan-ji/domql/tree/master/examples
