@@ -43,6 +43,39 @@ var result2 = cursor.execute();
 var resultX = cursor.execute();
 ```
 
+## Basic Usage
+
+When writing queries, use the following DOMQL query syntax:
+```sql
+SELECT [HTMLTag,...|*] FROM [HTMLTag|*] (WHERE [attribute='value'] (, AND|OR ...))
+```
+
+### Select all elements
+```javascript
+var result = domql.$("SELECT * FROM *");
+```
+
+### Select the <code>html</code> element
+```javascript
+var result = domql.$("SELECT html FROM *");
+```
+
+### Select all elements inside the <code>html</code> element
+```javascript
+var result = domql.$("SELECT * FROM html");
+```
+
+### Select all <code>p</code> and <code>a</code> elements inside <code>div</code> elements
+```javascript
+var result = domql.$("SELECT p, a FROM div");
+```
+
+### Select all <code>p</code> and <code>a</code> elements inside <code>div</code> elements with conditions
+```javascript
+var result = domql.$("SELECT p, a FROM div WHERE p.id='foo' AND (a.id='bar' OR a.href='baz.com')");
+```
+
+
 ## Using a different query engine
 
 By default, Domql uses <code>document.querySelectorAll</code> as its query engine. While this results in an overall smaller
