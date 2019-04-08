@@ -47,7 +47,7 @@ var resultX = cursor.execute();
 
 When writing queries, use the following DOMQL query syntax:
 ```sql
-SELECT [HTMLTag,...|*] FROM [HTMLTag|*] (WHERE [attribute='value'] (, AND|OR ...))
+SELECT [HTMLTag,...|*] FROM [HTMLTag|*] (WHERE [HTMLTag].[attribute='value'] (, AND|OR ...))
 ```
 
 ### Select all elements
