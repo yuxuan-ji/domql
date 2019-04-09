@@ -30,6 +30,21 @@ From script:
 </script>
 ```
 
+## Query Syntax
+
+When writing queries, use the following DOMQL query syntax:
+```sql
+SELECT [HTMLTag,...|*] FROM [HTMLTag|*] (WHERE [HTMLTag].[attribute='value'] (, AND|OR ...)) (LIMIT value)
+```
+
+## Demo
+
+_A demo is available in the [Demo Page][demo]._
+
+## More examples
+
+_For even more examples and usage, please refer to the [Examples Page][examples]._
+
 ## Compiling a DOMQL query for subsequent usage
 
 You can use the <code>$$</code> helper method to avoid recompiling the same query:
@@ -67,13 +82,6 @@ From script:
 </script>
 ```
 
-## Demo
-
-_A demo is available in the [Demo Page][demo]._
-
-## More examples
-
-_For even more examples and usage, please refer to the [Examples Page][examples]._
 
 ## Development setup
 
@@ -83,16 +91,16 @@ Install Dependencies:
 npm install
 ```
 
-Build lib:
+Build dist:
 
 ```sh
 npm run build
 ```
 
-Build non-minified and run playground:
+Build JSDoc to markdown documentation:
 
 ```sh
-npm run dev
+npm run build:docs
 ```
 
 Run tests:
@@ -114,14 +122,6 @@ Please make sure to update tests as appropriate.
 4. Push to the branch (`git push origin feature/fooBar`)
 5. Create a new Pull Request
 
-## Documentation
-
-Documentation is generated with JsDoc and jsdoc2md. Run:
-
-```sh
-npm run build:docs
-```
-to generate the documentation automatically from your JsDoc comments.
 
 <!-- Markdown link & img dfn's -->
 [examples]: https://github.com/yuxuan-ji/domql/tree/master/examples
