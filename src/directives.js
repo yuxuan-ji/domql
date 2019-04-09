@@ -4,9 +4,9 @@
 export class Directives {
   /**
    * Directive: Sort
-   * @param  {Function} f : function used to compare
-   * @param  {Any[]} arr : list to sort
-   * @return {Any[]} : sorted list
+   * @param  {Function} f function used to compare
+   * @param  {Any[]} arr list to sort
+   * @return {Any[]} sorted list
    */
   static sort(f, arr) {
     arr.sort(f);

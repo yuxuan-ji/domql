@@ -48,12 +48,12 @@ Utility class containing directives for SQL modifiers
 Directive: Sort
 
 **Kind**: static method of [<code>Directives</code>](#Directives)  
-**Returns**: <code>Array.&lt;Any&gt;</code> - : sorted list  
+**Returns**: <code>Array.&lt;Any&gt;</code> - sorted list  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| f | <code>function</code> | : function used to compare |
-| arr | <code>Array.&lt;Any&gt;</code> | : list to sort |
+| f | <code>function</code> | function used to compare |
+| arr | <code>Array.&lt;Any&gt;</code> | list to sort |
 
 <a name="Directives.limiter"></a>
 
